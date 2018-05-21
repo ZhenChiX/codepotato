@@ -12,6 +12,7 @@
 body {
     width: 960px;
     margin: 0px auto;
+    
 }
 
 #login {
@@ -69,10 +70,42 @@ footer p {
     color: var(--main-black);
 }
 
-#table img {
+#table  {
     display: block;
-    max-width: 800px;
+    /* max-width: 800px; */
     margin:0px auto;
-    
+    background-image: url("/IMG/tableGreen.png");
+width: 800px;
+height: 800px;
+}
+#demi {
+    float: right;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background-image: url("/IMG/demismall.jpg");
+    background-size: cover;
+}
+#demi-chat {
+    float: right;
+    border: 2px solid black;
+    height: 100px;
+    width: 300px;
+    /* background: #000000; */
+} 
+#table p {
+    float: right;
+}
+#player-chat{
+    /* position: absolute; */
+    border: 2px solid black;
+    height: 100px;
+    width: 300px;
 
+
+
+}
+#chat-div{
+    position: absolute;
+            bottom: -350px;
 }
