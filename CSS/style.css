@@ -66,6 +66,13 @@ footer p {
 
 #nav ul li a {
     text-decoration: none;
-    color:var(--main-black);
+    color: var(--main-black);
+}
+
+#table img {
+    display: block;
+    max-width: 800px;
+    margin:0px auto;
     
+
 }
