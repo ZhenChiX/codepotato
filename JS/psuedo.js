@@ -74,7 +74,7 @@ function startHand(){ //
 //------------------------------
 // event handlers
 //------------------------------
-function HandlerFunction(e) {
+function handlerFunction(e) {
   var testCard = cleanInput(e); 
   var realCard = cardExistsInList(testCard, fullDeck); // returns true if in fullDeck
   var hasCard = cardExistsInList(testCard, playerHand); // returns true if in asker's hand
