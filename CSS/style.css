@@ -9,10 +9,19 @@
 
 /* green, #277714 */
 
+#logo {
+    display: block;
+    width: 150px;
+    height: 150px;
+    /* background-image: url("../IMG/demismall.jpg"); */
+    background-image: url("../IMG/logo.png");
+    background-size: cover;
+   
+}
+
 body {
     width: 960px;
     margin: 0px auto;
-    
 }
 
 #login {
@@ -70,42 +79,46 @@ footer p {
     color: var(--main-black);
 }
 
-#table  {
+#table {
     display: block;
     /* max-width: 800px; */
-    margin:0px auto;
-    background-image: url("/IMG/tableGreen.png");
-width: 800px;
-height: 800px;
+    margin: px auto;
+    background-image: url("../IMG/tableGreen.png");
+    /* background-image: url("http://via.placeholder.com/100x100"); */
+    width: auto;
+    height: 800px;
 }
+
 #demi {
+    display: block;
     float: right;
     width: 100px;
     height: 100px;
-    display: inline-block;
-    background-image: url("/IMG/demismall.jpg");
+    /* display: inline-block; */
+    background-image: url("../IMG/demismall.jpg");
     background-size: cover;
 }
+
 #demi-chat {
     float: right;
     border: 2px solid black;
     height: 100px;
     width: 300px;
     /* background: #000000; */
-} 
+}
+
+#chat-div {
+    position: absolute;
+    bottom: 1%;
+}
+
 #table p {
     float: right;
 }
-#player-chat{
+
+#player-chat {
     /* position: absolute; */
     border: 2px solid black;
     height: 100px;
     width: 300px;
-
-
-
-}
-#chat-div{
-    position: absolute;
-            bottom: -350px;
 }
