@@ -8,47 +8,72 @@
     <link href="CSS/reset.css" type="text/css" rel="stylesheet"></link>
     <link href="CSS/style.css" type="text/css" rel="stylesheet"></link>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
-
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Orbitron:700|Press+Start+2P" rel="stylesheet">
     <title>LOGIN</title>
 </head>
 
-<div>
-
-    <body>
-        <span id="logo">
-
-            <!-- <img src="http://via.placeholder.com/100x100"> -->
-
+<body id="loginbg">
+    <div id="hell">
+        <span id="logo" class="animated jello infinite">
         </span>
-        <hr>
-        <div id="login">
-            <h1>LOGIN</h1>
+        <span>
+            <h1 id="projectName">CODE POTATO</h1>
+        </span>
+        <span id="socialMedia">
+            <ul>
+                <li id="facebook">
+                    <a href="#"></a>
+                </li>
+                <li id="linkedin">
+                    <a href="#"></a>
+                </li>
+                <li id="github">
+                    <a href="#"></a>
+                </li>
+                <li id="youtube">
+                    <a href="#"></a>
+                </li>
+                <li id="codefellows">
+                    <a href="#"></a>
+                </li>
+            </ul>
+        </span>
 
-            <div>
-                <form id="loginForm">
-                    <div>
-                        <ol>
-                            <li>
-                                <input type="text" placeholder="Name" />
-                            </li>
+    </div>
+    <hr>
+    <div id="login" class="animated slideInDown">
+        <h1>LOGIN</h1>
 
-                            <li>
-                                <input type="text" placeholder="CheatCode" />
-                            </li>
-                            <li>
-                                <button type="button" onclick="reDirect">Login</button>
-                            </li>
+        <div>
+            <form id="loginForm">
+                <div>
+                    <ol>
+                        <li>
+                            <br>
+                            <!-- <p>User Name</p> -->
+                            <input type="text" placeholder="Name" />
+                        </li>
 
-                        </ol>
-                    </div>
-                </form>
-            </div>
+                        <li>
+                            <br>
+                            <!-- <p>CheatCode</p> -->
+                            <input type="text" placeholder="CheatCode" />
+                        </li>
+                        <br>
+                        <li>
+                            <button id="submit" type="button" onclick="delay()">Login</button>
+                        </li>
+
+                    </ol>
+                </div>
+            </form>
         </div>
+    </div>
 
-    </body>
+</body>
 </div>
 
-<div></div>
+
 
 <footer>
     <hr>
@@ -56,6 +81,6 @@
     <br>
     <p>&copy;Code Potato 2018</p>
 </footer>
-
+<script src="JS/animation.js" type="text/javascript"></script>
 
 </html>
