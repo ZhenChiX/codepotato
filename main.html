@@ -59,31 +59,55 @@
             </ul>
         </div>
         <hr>
-        <div id="table">
-            <div id="demi-chat">
-                <!--place to insert chat with js-->
-            </div>
-            <span id="demi"></span>
-            <p>Demi</p>
-            <div id="chat-div">
+        <!-- MODAL POP UP HERE -->
+        <button id="popUp">Display Rules</button>
 
-                <div id="player-chat"></div>
+        <!-- <a class="button" href="#rules">Display Rules</a> -->
+</div>
+<div id="rules" class="modal animated flipInY">
+    <span class="close">&times;</span>
+    <h2>RULES</h2>
+    <p>Some text in the Modal Body</p>
+    <p>Some other text...</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil voluptatum, modi laboriosam excepturi accusamus exercitationem
+        unde perspiciatis expedita cumque esse atque itaque nostrum maxime magnam earum distinctio quas dolores nemoLorem
+        ipsum, dolor sit amet consectetur adipisicing elit. Cum architecto consequuntur veritatis, est blanditiis tenetur
+        voluptatem! Doloremque, architecto at nesciunt facere quo qui accusamus, soluta ipsum illo, cum labore facilis voluptate.
+        Sapiente voluptatibus inventore deleniti animi, dolorum excepturi quibusdam! Magnam quas eaque illum minus architecto
+        ullam, facilis nihil laborum, perferendis voluptatibus laudantium iusto veniam sequi hic nobis tempora est sed?</p>
 
-                <div>
-                    <input type="text" placeholder="type here" id="player-input">
-                    <button>Submit</button>
-                </div>
+</div>
 
-            </div>
-        </div>
+<div id="table">
+    <!-- /////TOP OF TABLE///// -->
+    <div id="demi-sets">
+        <p>DEMI SCORE</p>
+    </div>
+    <div id="demi"></div>
+    <div id="demi-chat">
+        <!--place to insert chat with js-->
+    </div>
+    <!-- //////////////////////////////////////MIDDLE//////////////////////////////// -->
+    <div id="drawPile"></div>
+    <!-- /////BOTTOM OF TABLE///// -->
+    <div id="player-chat"></div>
+    <div id="player-side">
+        <input type="text" placeholder="type here" id="player-input">
+    </div>
+    <div id="player-sets">
+        <p>PLAYER SCORE</p>
+    </div>
+</div>
+</div>
+</body>
+<footer>
+    <hr>
+    <br>
+    <br>
+    <p>&copy;Code Potato 2018</p>
+</footer>
 
-    </body>
-    <footer>
-        <hr>
-        <br>
-        <br>
-        <p>&copy;Code Potato 2018</p>
-    </footer>
-    <script src="JS/app.js" type="text/javascript"></script>
+<script src="JS/animation.js" type="text/javascript"></script>
+<script src="JS/app.js" type="text/javascript"></script>
 
 </html>

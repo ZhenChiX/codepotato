@@ -13,7 +13,7 @@
 
 /* font-family: 'Bungee Inline', cursive;  for title */
 
-p, h1 {
+p, h1, h2 {
     font-family: 'Press Start 2P', cursive;
 }
 
@@ -197,18 +197,24 @@ footer p {
 }
 
 #table {
-    display: block;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "demi-sets demi demi-chat" ". drawPile ." "player-chat . ." "player-side . player-sets";
     margin: 0px auto;
     background-image: url("../IMG/tableGreen.png");
-    /* background-image: url("../IMG/tableGreen.png"); */
-    /* background-image: url("http://via.placeholder.com/100x100"); */
-    height: 800px;
-    width: 800px;
+    height: 900px;
+    width: 900px;
+}
+
+#demi-sets {
+    display: grid;
+    grid-area: demi-sets;
 }
 
 #demi {
-    display: block;
-    float: right;
+    display: grid;
+    grid-area: demi;
     width: 100px;
     height: 100px;
     /* display: inline-block; */
@@ -217,27 +223,93 @@ footer p {
 }
 
 #demi-chat {
-    float: right;
-    border: 2px solid black;
-    height: 100px;
+    display: grid;
+    grid-area: demi-chat;
+    border: 2px solid var(--main-black);
+    height: 200px;
     width: 300px;
+    border-radius: 20px;
+    background: var(--main-black);
+    opacity: 0.5;
     /* background: #000000; */
 }
 
-#chat-div {
-    position: absolute;
-    bottom: 1%;
-}
-
-#table p {
-    float: right;
+#drawPile {
+    display: grid;
+    grid-area: drawPile;
+    background-image: url("../IMG/back_cards-07.png");
+    width: 300px;
+    height: 300px;
+    background-size: cover;
 }
 
 #player-chat {
-    /* position: absolute; */
+    display: grid;
+    grid-area: player-chat;
     border: 2px solid black;
-    height: 100px;
+    height: 200px;
     width: 300px;
+    border-radius: 20px;
+    background: var(--main-black);
+    opacity: 0.5;
+}
+
+#player-input {
+    display: grid;
+    grid-area: player-input;
+    width: 300px;
+    height: 30px;
+}
+
+#player-side {
+    display: grid;
+    grid-area: player-side;
+}
+
+#player-sets {
+    display: grid;
+    grid-area: player-sets;
+}
+
+/* #table p {
+    float: right;
+} */
+
+/* /////GO FISH RELATE///// */
+
+#popUp {
+    font-weight: bold;
+    position: absolute;
+    margin: 20px -30px auto;
+    box-sizing: border-box;
+}
+
+#rules {
+    display: show;
+    width: 400px;
+    height: 600px;
+    position: fixed;
+    left: 100px;
+    background: var(--main-black);
+    color: var(--main-white);
+    opacity: 0.6;
+    text-align: left;
+    overflow: auto;
+}
+
+#rules>h2 {
+    font-size: 25px;
+    height: 30px;
+    color: black;
+    background-color: var(--main-white);
+    text-align: center;
+}
+
+.close {
+    float: right;
+    color: var(--main-black);
+    font-size: 35px;
+    font-weight: bold;
 }
 
 /* /////RESULT HTML///// */
