@@ -1,13 +1,128 @@
+/* /////GLOBAL VARIABLE///// */
+
 :root {
     --main-red: #B50000;
     --main-black: #000000;
-    --main-text: #ffffff;
+    --main-white: #ffffff;
     --main-green: #277714;
 }
 
-/* red, #B50000 */
+/* font-family: 'Orbitron', sans-serif;   for h*/
 
-/* green, #277714 */
+/* font-family: 'Press Start 2P', cursive;  for p*/
+
+/* font-family: 'Bungee Inline', cursive;  for title */
+
+p, h1 {
+    font-family: 'Press Start 2P', cursive;
+}
+
+#logo {
+    display: block;
+    width: 150px;
+    height: 150px;
+    /* background-image: url("../IMG/demismall.jpg"); */
+    background-image: url("../IMG/logo.png");
+    background-size: cover;
+}
+
+#projectName {
+    display: block;
+    font-weight: bold;
+    font-size: 55px;
+    grid-area: title;
+    margin: 40px auto;
+    text-align: left;
+    text-shadow: 8px 7px 10px rgba(28, 110, 164, 0.82);
+}
+
+/* /////SOCIAL MEDIA ICON///// */
+
+#hell {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "logo title" ". nav";
+}
+
+#socialMedia {
+    grid-area: nav;
+}
+
+#socialMedia ul {
+    display: grid;
+    box-sizing: border-box;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    text-decoration: none;
+    grid-gap: 15px;
+    float: right;
+}
+
+#facebook {
+    background-image: url("../IMG/facebook-logo.svg");
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    transition-duration: 500ms;
+}
+
+#facebook:hover {
+    transform: scale(1.5);
+}
+
+#linkedin {
+    background-image: url("../IMG/linkedin-logo.svg");
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    transition-duration: 500ms;
+}
+
+#linkedin:hover {
+    transform: scale(1.5);
+}
+
+#github {
+    background-image: url("../IMG/github-sign.svg");
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    transition-duration: 500ms;
+}
+
+#github:hover {
+    transform: scale(1.5);
+}
+
+#youtube {
+    background-image: url("../IMG/youtube-logo.svg");
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    transition-duration: 500ms;
+}
+
+#youtube:hover {
+    transform: scale(1.5);
+}
+
+#codefellows {
+    background-image: url("../IMG/cflogo.png");
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    transition-duration: 500ms;
+}
+
+#codefellows:hover {
+    transform: scale(1.5);
+}
+
+/* /////INDEX HTML///// */
+
+#loginbg {
+    background-image: url("../IMG/redbg.jpg");
+    background-size: cover;
+}
 
 body {
     width: 960px;
@@ -15,53 +130,65 @@ body {
 }
 
 #login {
-    padding-top: 300px;
-    padding-bottom: 300px;
+    padding-top: 150px;
+    padding-bottom: 150px;
     max-width: 700px;
     margin: 0px auto;
+    animation-duration: 5s;
 }
 
 #login h1 {
-    height: 45px;
     display: grid;
+    height: 45px;
     font-weight: bold;
-    font-size: 2vw;
+    font-size: 30px;
     margin: 0px auto;
     color: var(--main-red);
     text-align: center;
     background-color: var(--main-black);
-    /* -webkit-border-radius: 15px; */
-    /* border-radius: 15px; */
     opacity: 0.7;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #ffffff;
     justify-content: center;
     align-items: center;
 }
 
 #loginForm {
-    box-sizing: border-box;
     display: grid;
+    font-size: 1vw;
+    box-sizing: border-box;
     text-align: center;
     margin: 0px auto;
     padding: 20px;
-    background-color: white;
+    background-color: #ffffff;
     box-shadow: 0px 50px 30px -30px rgba(0, 0, 0, 0.3);
     width: 100%;
+    height: 220px;
+    opacity: 0.8;
 }
 
-/* FOOTER CSS */
+/* /////FOOTER CSS///// */
 
 footer p {
     display: grid;
-    margin: 0px auto;
+    font-size: 20px;
+    font-weight: bold;
     text-align: center;
+    color: var(--main-white);
+    margin: 0px auto;
 }
 
-/* MAIN PAGE */
+/* /////MAIN PAGE///// */
+
+#mainbg {
+    background-image: url("../IMG/redbg.jpg");
+    /* background-image: url("../IMG/tableGreen.png"); */
+    background-size: cover;
+}
 
 #nav ul {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
 }
 
 #nav ul li a {
@@ -69,10 +196,60 @@ footer p {
     color: var(--main-black);
 }
 
-#table img {
+#table {
     display: block;
-    max-width: 800px;
-    margin:0px auto;
-    
+    margin: 0px auto;
+    background-image: url("../IMG/tableGreen.png");
+    /* background-image: url("../IMG/tableGreen.png"); */
+    /* background-image: url("http://via.placeholder.com/100x100"); */
+    height: 800px;
+    width: 800px;
+}
 
+#demi {
+    display: block;
+    float: right;
+    width: 100px;
+    height: 100px;
+    /* display: inline-block; */
+    background-image: url("../IMG/demismall.jpg");
+    background-size: cover;
+}
+
+#demi-chat {
+    float: right;
+    border: 2px solid black;
+    height: 100px;
+    width: 300px;
+    /* background: #000000; */
+}
+
+#chat-div {
+    position: absolute;
+    bottom: 1%;
+}
+
+#table p {
+    float: right;
+}
+
+#player-chat {
+    /* position: absolute; */
+    border: 2px solid black;
+    height: 100px;
+    width: 300px;
+}
+
+/* /////RESULT HTML///// */
+
+#resultbg {
+    background-image: url("../IMG/redbg.jpg");
+    background-size: cover;
+}
+
+/* /////ABOUT US HTML///// */
+
+#aboutusbg {
+    background-image: url("../IMG/redbg.jpg");
+    background-size: cover;
 }
