@@ -54,34 +54,34 @@ new CardObject('6', 'spades', '../IMG/6S.png');
 new CardObject('6', 'hearts', '../IMG/6H.png');
 new CardObject('6', 'diamonds', '../IMG/6D.png');
 new CardObject('6', 'clubs', '../IMG/6C.png');
-// new CardObject('7', 'spades', '../IMG/7S.png');
-// new CardObject('7', 'hearts', '../IMG/7H.png');
-// new CardObject('7', 'diamonds', '../IMG/7D.png');
-// new CardObject('7', 'clubs', '../IMG/7C.png');
-// new CardObject('8', 'spades', '../IMG/8S.png');
-// new CardObject('8', 'hearts', '../IMG/8H.png');
-// new CardObject('8', 'diamonds', '../IMG/8D.png');
-// new CardObject('8', 'clubs', '../IMG/8C.png');
-// new CardObject('9', 'spades', '../IMG/9S.png');
-// new CardObject('9', 'hearts', '../IMG/9H.png');
-// new CardObject('9', 'diamonds', '../IMG/9D.png');
-// new CardObject('9', 'clubs', '../IMG/9C.png');
-// new CardObject('10', 'spades', '../IMG/10S.png');
-// new CardObject('10', 'hearts', '../IMG/10H.png');
-// new CardObject('10', 'diamonds', '../IMG/10D.png');
-// new CardObject('10', 'clubs', '../IMG/10C.png');
-// new CardObject('j', 'spades', '../IMG/JS.png');
-// new CardObject('j', 'hearts', '../IMG/JH.png');
-// new CardObject('j', 'diamonds', '../IMG/JD.png');
-// new CardObject('j', 'clubs', '../IMG/JC.png');
-// new CardObject('q', 'spades', '../IMG/QS.png');
-// new CardObject('q', 'hearts', '../IMG/QH.png');
-// new CardObject('q', 'diamonds', '../IMG/QD.png');
-// new CardObject('q', 'clubs', '../IMG/QC.png');
-// new CardObject('k', 'spades', '../IMG/KS.png');
-// new CardObject('k', 'hearts', '../IMG/KH.png');
-// new CardObject('k', 'diamonds', '../IMG/KD.png');
-// new CardObject('k', 'clubs', '../IMG/KC.png');
+new CardObject('7', 'spades', '../IMG/7S.png');
+new CardObject('7', 'hearts', '../IMG/7H.png');
+new CardObject('7', 'diamonds', '../IMG/7D.png');
+new CardObject('7', 'clubs', '../IMG/7C.png');
+new CardObject('8', 'spades', '../IMG/8S.png');
+new CardObject('8', 'hearts', '../IMG/8H.png');
+new CardObject('8', 'diamonds', '../IMG/8D.png');
+new CardObject('8', 'clubs', '../IMG/8C.png');
+new CardObject('9', 'spades', '../IMG/9S.png');
+new CardObject('9', 'hearts', '../IMG/9H.png');
+new CardObject('9', 'diamonds', '../IMG/9D.png');
+new CardObject('9', 'clubs', '../IMG/9C.png');
+new CardObject('10', 'spades', '../IMG/10S.png');
+new CardObject('10', 'hearts', '../IMG/10H.png');
+new CardObject('10', 'diamonds', '../IMG/10D.png');
+new CardObject('10', 'clubs', '../IMG/10C.png');
+new CardObject('j', 'spades', '../IMG/JS.png');
+new CardObject('j', 'hearts', '../IMG/JH.png');
+new CardObject('j', 'diamonds', '../IMG/JD.png');
+new CardObject('j', 'clubs', '../IMG/JC.png');
+new CardObject('q', 'spades', '../IMG/QS.png');
+new CardObject('q', 'hearts', '../IMG/QH.png');
+new CardObject('q', 'diamonds', '../IMG/QD.png');
+new CardObject('q', 'clubs', '../IMG/QC.png');
+new CardObject('k', 'spades', '../IMG/KS.png');
+new CardObject('k', 'hearts', '../IMG/KH.png');
+new CardObject('k', 'diamonds', '../IMG/KD.png');
+new CardObject('k', 'clubs', '../IMG/KC.png');
 
 //------------------------------
 // helper functions
@@ -166,12 +166,11 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
   // opponentHand is the hand of the other player
   var anotherTurn = false;
   // console.log('anotherTurn: ' + anotherTurn);
-  for (i in opponentHand) {
-    if (testCard === opponentHand[i].name) {
+  for (var i = opponentHand.length - 1; i > -1; i--){
+    if (testCard === opponentHand[i].name){
       playerHand.push(opponentHand[i]); //why we are only getting one card
       opponentHand.splice(i, 1);
       anotherTurn = true;
-      console.log(i);
       // console.log('go again!');
     } // end if testCard matches current card
   } // end loop through opponent's hand
@@ -233,7 +232,8 @@ function handlerFunction(event) {
     alert('That card does not exit, try your turn again.');
   } else if (!hasCard) {
     alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
-  } else {
+  }
+   else {
     validateCardAsk(testCard, userHand, demiHand);
     // madeSets(userHand, userSets);
     renderHand();
@@ -246,7 +246,7 @@ function handlerFunction(event) {
       }
     } // end of demi's turn
   }
-
+  event.target.cardGuess.value = null; // empties the form field after the data has been grabbed
 } // end function HandlerFunction
 
 //------------------------------
