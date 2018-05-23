@@ -103,6 +103,7 @@ function cardExistsInList (cardName, handArray){
   }; // end function cardExistsInList
 
 function madeSets(handArray, setsArray) { // takes in an array of the cards we are checking for 4 of a kind
+var nameList = ['a', '2', '3', '4', '5', '6', '7', '9', '10', 'j', 'q', 'k'];
   for (var i in nameList) {
     var match = 0;
     for (var j in handArray) {
@@ -111,15 +112,17 @@ function madeSets(handArray, setsArray) { // takes in an array of the cards we a
       }
     } // end loop for all cards in handArray
     if (match === 4) {
-      tempSets.push(nameList[i]);
+      // tempSets.push(nameList[i]);
       for (var j in handArray) {
         if (handArray[j].name === nameList[i]) {
-          renderSetMade(turnNow, handArray[j]); // show or alert user that this card is part of a set! 
-          setsArray.push(handArray.split(i, 1)); // put this object into setsArray, take it out of handArray
+          setsArray.push(handArray.splice(i, 1)[0]); // put this object into setsArray, take it out of handArray
         }
-      }
+      } // end looping through handArray
+      console.log('A set was made! ' + turnNow + ' has four ' + nameList[i] + 's!');
+      renderSetMade(turnNow, handArray[j]); // show or alert user that this card is part of a set! 
     } // end of dealing with us having a set of 4 cards. 
   } // end loop for all famous tech names
+  // renderHand() is called after madeSets, so we don't need to do that now. 
 } // end function madeSets
 
 //------------------------------
@@ -209,13 +212,13 @@ function handlerFunction(event) {
     alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
   } else {
     validateCardAsk(testCard, userHand, demiHand);
-    // madeSets(userHand, userSets);
+    madeSets(userHand, userSets);
     // renderHand();
     if (turnNow === 'demi') {
       // goFish for player's hand
       while (turnNow === 'demi') {
         demiTurn();
-        // madeSets(demiHand, demiSets);
+        madeSets(demiHand, demiSets);
         // renderHand();
       }
     } // end of demi's turn
