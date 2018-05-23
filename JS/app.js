@@ -226,7 +226,7 @@ function handlerFunction(event) {
       }
     } // end of demi's turn
   }
-
+  event.target.cardGuess.value = null; // empties the form field after the data has been grabbed
 } // end function HandlerFunction
 
 //------------------------------
