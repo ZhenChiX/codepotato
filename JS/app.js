@@ -176,6 +176,8 @@ function demiTurn(){
   var testIndex = randomCard(demiHand); // card we will ask for
   console.log('test index: ' + testIndex);
   console.log('demi guess: ' + demiHand[testIndex].name);
+  alert('demi guess: ' + demiHand[testIndex].name);
+  
   validateCardAsk(demiHand[testIndex], demiHand, userHand);
 } // end function demiTurn
 
@@ -235,12 +237,3 @@ startHand();
 inputForm.addEventListener('submit', handlerFunction);
 
 
-//redirect login//
-
-// function redirect(){
-//     var login = document.getElementById('reDirect');
-//     login.addEventListener('submit');
-
-// }
-
-//change//

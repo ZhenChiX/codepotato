@@ -202,10 +202,10 @@ footer p {
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas: 
     "demi-sets demi demi-chat"
-    ". drawpile ."
+    "demi-hands demi-hands demi-hands"
     ". drawPile ." 
-    "player-chat . ."
-     "player-side player player-sets";
+    "player-hands player-hands player-hands"
+     "player-side player-name player-sets";
     margin: 0px auto;
     background-image: url("../IMG/tableGreen.png");
     height: 900px;
@@ -225,6 +225,7 @@ footer p {
     /* display: inline-block; */
     background-image: url("../IMG/demismall.jpg");
     background-size: cover;
+    margin: 30px auto;;;
 }
 
 #demi-chat {
@@ -238,7 +239,15 @@ footer p {
     opacity: 0.5;
     /* background: #000000; */
 }
-
+#demi-hands{
+    grid-area: demi-hands;
+    text-align: center;
+    
+}
+#player-hands{
+    grid-area: player-hands;
+    text-align: center;
+}
 #drawPile {
     display: grid;
     grid-area: drawPile;
@@ -250,7 +259,7 @@ footer p {
 
 #player-chat {
     display: grid;
-    grid-area: player-chat;
+    grid-area: player-side;
     border: 2px solid black;
     height: 100px;
     width: 300px;
@@ -266,9 +275,17 @@ footer p {
     height: 30px;
 }
 
+#player-name{
+    grid-area: player-name;
+    margin:20px auto;
+}
+
 #player-side {
+    
     display: grid;
     grid-area: player-side;
+    position: relative;
+    bottom: -100px ;
 }
 
 #player-sets {
