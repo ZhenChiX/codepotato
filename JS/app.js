@@ -146,12 +146,14 @@ function validateCardAsk(testCard, playerHand, opponentHand){ // takes cardAsk
   // opponentHand is the hand of the other player
   var anotherTurn = false;
   // console.log('anotherTurn: ' + anotherTurn);
-  for (i in opponentHand){
+  for (var i = opponentHand.length - 1; i > -1; i--){
     if (testCard === opponentHand[i].name){
+      console.log('opponent hand array length before push: ' + opponentHand.length);
       playerHand.push(opponentHand[i]); //why we are only getting one card
       opponentHand.splice(i, 1);
       anotherTurn = true;
-      console.log(i);
+      console.log('index of opponent hand: ' + i);
+      console.log('opponent hand array length after push: ' + opponentHand.length);
       // console.log('go again!');
     } // end if testCard matches current card
   } // end loop through opponent's hand
@@ -208,12 +210,13 @@ function handlerFunction(event) {
   console.log('test card: ' + testCard);
   // var testCard = cleanInput(e);
   var realCard = cardExistsInList(testCard, fullDeck); // returns true if in fullDeck
-  var hasCard = cardExistsInList(testCard, userHand); // returns true if in asker's hand
+  // var hasCard = cardExistsInList(testCard, userHand); // returns true if in asker's hand
   if (!realCard) {
      alert('That card does not exit, try your turn again.');
-  } else if (!hasCard) {
-    alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
-  } else {
+  }// else if (!hasCard) {
+  //   alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
+  //}
+   else {
     validateCardAsk(testCard, userHand, demiHand);
     // madeSets(userHand, userSets);
     // renderHand();
