@@ -199,8 +199,13 @@ footer p {
 #table {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-template-areas: "demi-sets demi demi-chat" ". drawPile ." "player-chat . ." "player-side . player-sets";
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+    "demi-sets demi demi-chat"
+    "demi-hands demi-hands demi-hands"
+    ". drawPile ." 
+    "player-hands player-hands player-hands"
+     "player-side player-name player-sets";
     margin: 0px auto;
     background-image: url("../IMG/tableGreen.png");
     height: 900px;
@@ -220,34 +225,43 @@ footer p {
     /* display: inline-block; */
     background-image: url("../IMG/demismall.jpg");
     background-size: cover;
+    margin: 30px auto;;;
 }
 
 #demi-chat {
     display: grid;
     grid-area: demi-chat;
     border: 2px solid var(--main-black);
-    height: 200px;
+    height: 100px;
     width: 300px;
     border-radius: 20px;
     background: var(--main-black);
     opacity: 0.5;
     /* background: #000000; */
 }
-
+#demi-hands{
+    grid-area: demi-hands;
+    text-align: center;
+    
+}
+#player-hands{
+    grid-area: player-hands;
+    text-align: center;
+}
 #drawPile {
     display: grid;
     grid-area: drawPile;
     background-image: url("../IMG/back_cards-07.png");
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     background-size: cover;
 }
 
 #player-chat {
     display: grid;
-    grid-area: player-chat;
+    grid-area: player-side;
     border: 2px solid black;
-    height: 200px;
+    height: 100px;
     width: 300px;
     border-radius: 20px;
     background: var(--main-black);
@@ -261,9 +275,17 @@ footer p {
     height: 30px;
 }
 
+#player-name{
+    grid-area: player-name;
+    margin:20px auto;
+}
+
 #player-side {
+    
     display: grid;
     grid-area: player-side;
+    position: relative;
+    bottom: -100px ;
 }
 
 #player-sets {
@@ -324,4 +346,65 @@ footer p {
 #aboutusbg {
     background-image: url("../IMG/redbg.jpg");
     background-size: cover;
+}
+
+/* /////SCOREBOARD PAGE///// */
+
+#scoreboard {
+    display: block;
+    margin: 0px auto;
+    text-align: center;
+}
+#scoreboard h2{
+    font-size: 35px;
+}
+
+.scorelist {
+    background-color: var(--main-black);
+    opacity: 0.5;
+    width: 700px;
+    height: 60px;
+    margin: 0px auto;
+    color: var(--main-white);
+    font-family: 'Press Start 2P', cursive;
+}
+
+#score1 {
+    animation-delay: 0.5s;
+}
+
+#score2 {
+    animation-delay: 1s;
+}
+
+#score3 {
+    animation-delay: 1.5s;
+}
+
+#score4 {
+    animation-delay: 2s;
+}
+
+#score5 {
+    animation-delay: 2.5s;
+}
+
+#score6 {
+    animation-delay: 3s;
+}
+
+#score7 {
+    animation-delay: 3.5s;
+}
+
+#score8 {
+    animation-delay: 4s;
+}
+
+#score9 {
+    animation-delay: 4.5s;
+}
+
+#score10 {
+    animation-delay: 5s;
 }
