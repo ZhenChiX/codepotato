@@ -96,7 +96,7 @@ function validateCardAsk(testCard, player) { // takes cardAsk
   }
 }; // end funciton validateCardAsk
 
-funciton demiTurn(){
+function demiTurn(){
   var testCard = randomCard(demiHand); // card we will ask for. 
   turnNow = validateCardAsk(testCard, 'demi');
 } // end function demiTurn
