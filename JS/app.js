@@ -91,7 +91,7 @@ function randomCard(deckArray) {
 
 function cleanInput(userInput){
   userInput. toLowerCase
-};
+}; // end function cleanInput
 
 function cardExistsInList (cardName, handArray){
     var temp = false;
@@ -103,7 +103,6 @@ function cardExistsInList (cardName, handArray){
   }; // end function cardExistsInList
 
 function madeSets(handArray, setsArray) { // takes in an array of the cards we are checking for 4 of a kind
-
   for (var i in nameList) {
     var match = 0;
     for (var j in handArray) {
@@ -139,37 +138,45 @@ function renderHand() {
 //------------------------------
 // main functions
 //------------------------------
-function validateCardAsk(testCard, player){ // takes cardAsk
+function validateCardAsk(testCard, playerHand, opponentHand){ // takes cardAsk
   // testCard is the card the player is guessing, we have already checked if exists as a card and if user is allowed to ask for it
-  // player is who's turn it is. it is a string either equal to 'user' or to 'demi'
+  // playerHand is the hand of current player
+  // opponentHand is the hand of the other player
   var anotherTurn = false;
   console.log('anotherTurn: ' + anotherTurn);
-  var playerHand = [];
-  var opponentHand = [];
-  // if player = 'user', then oppenentHand is demiHand, & playerHand is userHand
-  // if player = 'demi', then the opposite than above. 
+  for (i in opponentHand){
+    if (testCard === opponentHand[i].name){
+      playerHand.push(opponentHand[i]);
+      opponentHand.splice(i, 1);
+      anotherTurn = true;
+      console.log('go again!');
+    } // end if testCard matches current card
+  } // end loop through opponent's hand
 
-  // for each card in opponent hand
-    // if testCard === opponent hand
-      // remove from opponent and
-      // put in other hand
-      // anotherTurn = true
-    // end loop
-    if(anotherTurn === false) {
-      if (turnNow === 'demi'){
-        turnNow = 'user';
-      } else { // turnNow === 'user'
-        turnNow = 'demi';
-        console.log('turnNow: ' + turnNow);
-      }
+  if(anotherTurn === false) {
+    drawCard(playerHand);
+    // renderGoFish();
+    if (turnNow === 'demi'){
+      turnNow = 'user';
+    } else { // turnNow === 'user'
+      turnNow = 'demi';
+      console.log('turnNow: ' + turnNow);
     }
+  } // end who's turn is next
 }; // end function validateCardAsk
 
+function drawCard(playerHand){
+  var draw = randomCard(drawPile); // randomly select card from drawPile
+  playerHand.push(drawPile[draw]);
+  drawPile.splice(draw, 1);
+  // playerHand.push(drawPile.splice(draw, 1)); // whoever's hand was passed to us, add to that player's hand and remove from drawPile
+}; // end function drawCard
+
 function demiTurn(){
-  var testIndex = randomCard(demiHand); // card we will ask for. 
+  var testIndex = randomCard(demiHand); // card we will ask for
   console.log('test index: ' + testIndex);
   console.log('demi guess: ' + demiHand[testIndex].name);
-  validateCardAsk(demiHand[testIndex], 'demi');
+  validateCardAsk(demiHand[testIndex], demiHand, userHand);
 } // end function demiTurn
 
 function startHand(){ // 
@@ -201,7 +208,7 @@ function handlerFunction(event) {
   } else if (!hasCard) {
     alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
   } else {
-    validateCardAsk(testCard, 'user');
+    validateCardAsk(testCard, userHand, demiHand);
     // madeSets(userHand, userSets);
     // renderHand();
     if (turnNow === 'demi') {
