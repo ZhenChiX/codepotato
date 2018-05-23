@@ -11,7 +11,9 @@ var userSets = []; // sets of 4 in player's hand
 var fullDeck = [];
 var startHandSize = 5;
 var cardAsk = '';
-var turnNow = ''; // will either be 'user' or 'demi'
+var turnNow = 'user'; // will either be 'user' or 'demi'
+var nameList = []; // list of all our famous tech names.
+var inputForm = document.getElementById('game-form');
 
 //------------------------------
 // constructor functions
@@ -87,6 +89,10 @@ function randomCard(deckArray) {
   return Math.floor(Math.random() * deckArray.length);
  } // end function randomCard
 
+function cleanInput(userInput){
+  userInput. toLowerCase
+};
+
 function cardExistsInList (cardName, handArray){
     var temp = false;
       for (var i in handArray){
@@ -95,91 +101,139 @@ function cardExistsInList (cardName, handArray){
       };
       return temp;
   }; // end function cardExistsInList
-  
-  //------------------------------
-  // main functions
-  //------------------------------
-  function validateCardAsk(testCard, player){ // takes cardAsk
-    // testCard is the card the player is guessing, we have already checked if exists as a card and if user is allowed to ask for it
-    // player is who's turn it is. it is a string either equal to 'user' or to 'demi'
-    var anotherTurn = false;
-    var playerHand = [];
-    var opponentHand = [];
-    // if player = 'user', then oppenentHand is demiHand, & playerHand is userHand
-    // if player = 'demi', then the opposite than above. 
-  
-    // for each card in opponent hand
-      // if testCard === opponent hand
-        // remove from opponent and
-        // put in other hand
-        // anotherTurn = true
-      // end loop
-      if(anotherTurn) {
-        return 'user'; 
-      } else {
-        return 'demi'; // go Fish, then demi's turn
+
+function madeSets(handArray, setsArray) { // takes in an array of the cards we are checking for 4 of a kind
+
+  for (var i in nameList) {
+    var match = 0;
+    for (var j in handArray) {
+      if (handArray[j].name === nameList[i]) {
+        match++;
       }
-  }; // end funciton validateCardAsk
-  
-  function startHand(){ // 
-    drawPile = fullDeck.slice();
-      for (var i = 0; i < 5; i++){
-        var draw = randomCard(drawPile);
-        demiHand.push(drawPile[draw]);
-        drawPile.splice(draw, 1);
-        draw = randomCard(drawPile);
-        userHand.push(drawPile[draw]);
-        drawPile.splice(draw, 1);
-      };
-  }; // end function startHand
-  
-  
-  //------------------------------
-  // event handlers
-  //------------------------------
-  function handlerFunction(e) {
-    var testCard = cleanInput(e); 
-    var realCard = cardExistsInList(testCard, fullDeck); // returns true if in fullDeck
-    var hasCard = cardExistsInList(testCard, playerHand); // returns true if in asker's hand
-    if(!realCard) {
-      // that card does not exit, try your turn again. 
-    } else if(!hasCard) {
-      // Hey cheater, you can't ask for a card on in your hand!, try again
-    } else {
-      turnNow = validateCardAsk(testCard, 'user');
-      renderHand();
-      if(turnNow === 'demi') {
-        // goFish for player's hand
-        while(turnNow = 'demi') {
-          // take demi's turn
+    } // end loop for all cards in handArray
+    if (match === 4) {
+      tempSets.push(nameList[i]);
+      for (var j in handArray) {
+        if (handArray[j].name === nameList[i]) {
+          renderSetMade(turnNow, handArray[j]); // show or alert user that this card is part of a set! 
+          setsArray.push(handArray.split(i, 1)); // put this object into setsArray, take it out of handArray
         }
-      } // end of demi's turn
+      }
+    } // end of dealing with us having a set of 4 cards. 
+  } // end loop for all famous tech names
+} // end function madeSets
+
+//------------------------------
+// render functions
+//------------------------------
+function renderSetMade(user, cardObject) {
+  // madeSets is managing the data. We want to alert the user they made a set! 
+} // end function renderSetMade
+
+function renderHand() {
+  // this function is called whenever the cards held by either User or Demi might change
+  // it should display the correct number of card backs for demi, and the correct card objects for user
+  // probably it should also adjust the draw pile. 
+} // end function renderHand
+
+//------------------------------
+// main functions
+//------------------------------
+function validateCardAsk(testCard, player){ // takes cardAsk
+  // testCard is the card the player is guessing, we have already checked if exists as a card and if user is allowed to ask for it
+  // player is who's turn it is. it is a string either equal to 'user' or to 'demi'
+  var anotherTurn = false;
+  console.log('anotherTurn: ' + anotherTurn);
+  var playerHand = [];
+  var opponentHand = [];
+  // if player = 'user', then oppenentHand is demiHand, & playerHand is userHand
+  // if player = 'demi', then the opposite than above. 
+
+  // for each card in opponent hand
+    // if testCard === opponent hand
+      // remove from opponent and
+      // put in other hand
+      // anotherTurn = true
+    // end loop
+    if(anotherTurn === false) {
+      if (turnNow === 'demi'){
+        turnNow = 'user';
+      } else { // turnNow === 'user'
+        turnNow = 'demi';
+        console.log('turnNow: ' + turnNow);
+      }
     }
-  
-  } // end function HandlerFunction
-  
-  
-  //------------------------------
-  // on load
-  //------------------------------
-  startHand();
-  // renderHand();
-  
-  //------------------------------
-  // event listeners
-  //------------------------------
-  // nameInput.addEventListener('submit', HandlerFunction);
-  
-  
-  
-  
-  
-  //redirect login//
-  
-  // function redirect(){
-  //     var login = document.getElementById('reDirect');
-  //     login.addEventListener('submit');
-  
-  // }
-  
-  //change//
+}; // end function validateCardAsk
+
+function demiTurn(){
+  var testIndex = randomCard(demiHand); // card we will ask for. 
+  console.log('test index: ' + testIndex);
+  console.log('demi guess: ' + demiHand[testIndex].name);
+  validateCardAsk(demiHand[testIndex], 'demi');
+} // end function demiTurn
+
+function startHand(){ // 
+  drawPile = fullDeck.slice();
+    for (var i = 0; i < 5; i++){
+      var draw = randomCard(drawPile);
+      demiHand.push(drawPile[draw]);
+      drawPile.splice(draw, 1);
+      draw = randomCard(drawPile);
+      userHand.push(drawPile[draw]);
+      drawPile.splice(draw, 1);
+    };
+}; // end function startHand
+
+
+//------------------------------
+// event handlers
+//------------------------------
+function handlerFunction(event) {
+  event.preventDefault();
+  var testCard = event.target.cardGuess.value;
+  testCard.toLowerCase();
+  console.log('test card: ' + testCard);
+  // var testCard = cleanInput(e);
+  var realCard = cardExistsInList(testCard, fullDeck); // returns true if in fullDeck
+  var hasCard = cardExistsInList(testCard, userHand); // returns true if in asker's hand
+  if (!realCard) {
+     alert('That card does not exit, try your turn again.');
+  } else if (!hasCard) {
+    alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
+  } else {
+    validateCardAsk(testCard, 'user');
+    // madeSets(userHand, userSets);
+    // renderHand();
+    if (turnNow === 'demi') {
+      // goFish for player's hand
+      while (turnNow === 'demi') {
+        demiTurn();
+        // madeSets(demiHand, demiSets);
+        // renderHand();
+      }
+    } // end of demi's turn
+  }
+
+} // end function HandlerFunction
+
+//------------------------------
+// on load
+//------------------------------
+startHand();
+// renderHand();
+
+//------------------------------
+// event listeners
+//------------------------------
+inputForm.addEventListener('submit', handlerFunction);
+
+
+//redirect login//
+
+// function redirect(){
+//     var login = document.getElementById('reDirect');
+//     login.addEventListener('submit');
+
+// }
+
+//change//
