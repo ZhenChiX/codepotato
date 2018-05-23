@@ -20,11 +20,11 @@ var inputForm = document.getElementById('game-form');
 //------------------------------
 // constructor functions
 //------------------------------
-var CardObject = function(name, suit, filePath){
-    this.name = name;
-    this.suit = suit;
-    this.filePath = filePath;
-    fullDeck.push(this);
+var CardObject = function (name, suit, filePath) {
+  this.name = name;
+  this.suit = suit;
+  this.filePath = filePath;
+  fullDeck.push(this);
 }; // end constructor CardObject
 
 //------------------------------
@@ -89,20 +89,20 @@ new CardObject('6', 'clubs', '../IMG/6C.png');
 function randomCard(deckArray) {
   // This function can be used for any non-zero stack of cards in deckArray
   return Math.floor(Math.random() * deckArray.length);
- } // end function randomCard
+} // end function randomCard
 
-function cleanInput(userInput){
-  userInput. toLowerCase
+function cleanInput(userInput) {
+  userInput.toLowerCase
 }; // end function cleanInput
 
-function cardExistsInList (cardName, handArray){
-    var temp = false;
-      for (var i in handArray){
-        if (cardName === handArray[i].name)
-        temp = true;  
-      };
-      return temp;
-  }; // end function cardExistsInList
+function cardExistsInList(cardName, handArray) {
+  var temp = false;
+  for (var i in handArray) {
+    if (cardName === handArray[i].name)
+      temp = true;
+  };
+  return temp;
+}; // end function cardExistsInList
 
 function madeSets(handArray, setsArray) { // takes in an array of the cards we are checking for 4 of a kind
   for (var i in nameList) {
@@ -135,19 +135,39 @@ function renderHand() {
   // this function is called whenever the cards held by either User or Demi might change
   // it should display the correct number of card backs for demi, and the correct card objects for user
   // probably it should also adjust the draw pile. 
-} // end function renderHand
+  // end function renderHand
+
+  //Render DEMI HAND
+  var demiUl = document.getElementById('render-demi');
+  demiUl.innerHTML = '';
+  for (var i in demiHand) {
+    // console.table(demiHand);
+    var demiLi = document.createElement('li');
+    demiLi.textContent = demiHand[i].name;
+    demiUl.append(demiLi);
+  }
+  //Render PLAYER HAND
+  var playerUl = document.getElementById('render-player');
+  playerUl.innerHTML = '';
+  for (var i in userHand) {
+    // console.table(userHand);
+    var playerLi = document.createElement('li');
+    playerLi.textContent = userHand[i].name;
+    playerUl.append(playerLi);
+  }
+}
 
 //------------------------------
 // main functions
 //------------------------------
-function validateCardAsk(testCard, playerHand, opponentHand){ // takes cardAsk
+function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
   // testCard is the card the player is guessing, we have already checked if exists as a card and if user is allowed to ask for it
   // playerHand is the hand of current player
   // opponentHand is the hand of the other player
   var anotherTurn = false;
   // console.log('anotherTurn: ' + anotherTurn);
-  for (i in opponentHand){
-    if (testCard === opponentHand[i].name){
+  for (i in opponentHand) {
+    if (testCard === opponentHand[i].name) {
       playerHand.push(opponentHand[i]); //why we are only getting one card
       opponentHand.splice(i, 1);
       anotherTurn = true;
@@ -156,10 +176,10 @@ function validateCardAsk(testCard, playerHand, opponentHand){ // takes cardAsk
     } // end if testCard matches current card
   } // end loop through opponent's hand
 
-  if(anotherTurn === false) {
+  if (anotherTurn === false) {
     drawCard(playerHand);
     // renderGoFish();
-    if (turnNow === 'demi'){
+    if (turnNow === 'demi') {
       turnNow = 'user';
     } else { // turnNow === 'user'
       turnNow = 'demi';
@@ -168,14 +188,14 @@ function validateCardAsk(testCard, playerHand, opponentHand){ // takes cardAsk
   } // end who's turn is next
 }; // end function validateCardAsk
 
-function drawCard(playerHand){
+function drawCard(playerHand) {
   var draw = randomCard(drawPile); // randomly select card from drawPile
   playerHand.push(drawPile[draw]);
   drawPile.splice(draw, 1);
   // playerHand.push(drawPile.splice(draw, 1)); // whoever's hand was passed to us, add to that player's hand and remove from drawPile
 }; // end function drawCard
 
-function demiTurn(){
+function demiTurn() {
   var testIndex = randomCard(demiHand); // card we will ask for
   // console.log('test index: ' + testIndex);
   console.log('demi guess: ' + demiHand[testIndex].name);
@@ -185,16 +205,16 @@ function demiTurn(){
 
 } // end function demiTurn
 
-function startHand(){ // 
+function startHand() { // 
   drawPile = fullDeck.slice();
-    for (var i = 0; i < 5; i++){
-      var draw = randomCard(drawPile);
-      demiHand.push(drawPile[draw]);
-      drawPile.splice(draw, 1);
-      draw = randomCard(drawPile);
-      userHand.push(drawPile[draw]);
-      drawPile.splice(draw, 1);
-    };
+  for (var i = 0; i < 5; i++) {
+    var draw = randomCard(drawPile);
+    demiHand.push(drawPile[draw]);
+    drawPile.splice(draw, 1);
+    draw = randomCard(drawPile);
+    userHand.push(drawPile[draw]);
+    drawPile.splice(draw, 1);
+  };
 }; // end function startHand
 
 
@@ -210,19 +230,19 @@ function handlerFunction(event) {
   var realCard = cardExistsInList(testCard, fullDeck); // returns true if in fullDeck
   var hasCard = cardExistsInList(testCard, userHand); // returns true if in asker's hand
   if (!realCard) {
-     alert('That card does not exit, try your turn again.');
+    alert('That card does not exit, try your turn again.');
   } else if (!hasCard) {
     alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
   } else {
     validateCardAsk(testCard, userHand, demiHand);
     // madeSets(userHand, userSets);
-    // renderHand();
+    renderHand();
     if (turnNow === 'demi') {
       // goFish for player's hand
       while (turnNow === 'demi') {
         demiTurn();
         // madeSets(demiHand, demiSets);
-        // renderHand();
+        renderHand();
       }
     } // end of demi's turn
   }
@@ -233,7 +253,7 @@ function handlerFunction(event) {
 // on load
 //------------------------------
 startHand();
-// renderHand();
+renderHand();
 
 //------------------------------
 // event listeners
