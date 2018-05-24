@@ -241,9 +241,23 @@ footer p {
     text-align: center;
 }
 
+#demi-hands img {
+    width: 80px;
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 #player-hands {
     grid-area: player-hands;
     text-align: center;
+}
+
+#player-hands img {
+    width: 80px;
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 #drawPile {
@@ -264,7 +278,9 @@ footer p {
 #render-player li {
     display: inline;
 }
+
 /* /////BOTTOM OF TABLE///// */
+
 #player-chat {
     display: grid;
     grid-area: player-side;
@@ -417,7 +433,5 @@ footer p {
 #score10 {
     animation-delay: 5s;
 }
-
-
 
 /* ///testing only/// */
