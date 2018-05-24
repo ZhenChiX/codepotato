@@ -15,6 +15,8 @@ var turnNow = 'user'; // will either be 'user' or 'demi'
 var nameList = []; // list of all our famous tech names.
 var inputForm = document.getElementById('game-form');
 
+// var playerHand=[];
+// var opponentHand=[];
 //------------------------------
 // constructor functions
 //------------------------------
@@ -155,12 +157,13 @@ function validateCardAsk(testCard, playerHand, opponentHand){ // takes cardAsk
   // playerHand is the hand of current player
   // opponentHand is the hand of the other player
   var anotherTurn = false;
-  for (i in opponentHand){
+  // console.log('anotherTurn: ' + anotherTurn);
+  for (var i = opponentHand.length - 1; i > -1; i--){
     if (testCard === opponentHand[i].name){
-      playerHand.push(opponentHand[i]);
+      playerHand.push(opponentHand[i]); //why we are only getting one card
       opponentHand.splice(i, 1);
       anotherTurn = true;
-      console.log('go again!');
+      // console.log('go again!');
     } // end if testCard matches current card
   } // end loop through opponent's hand
 
@@ -185,8 +188,12 @@ function drawCard(playerHand){
 
 function demiTurn(){
   var testIndex = randomCard(demiHand); // card we will ask for
+  // console.log('test index: ' + testIndex);
   console.log('demi guess: ' + demiHand[testIndex].name);
-  validateCardAsk(demiHand[testIndex], demiHand, userHand);
+
+  validateCardAsk(demiHand[testIndex].name, demiHand, userHand);//where issues are
+
+
 } // end function demiTurn
 
 function startHand(){ // 
@@ -207,7 +214,7 @@ function startHand(){ //
 //------------------------------
 function handlerFunction(event) {
   event.preventDefault();
-  var testCard = event.target.cardGuess.value;
+  var testCard = event.target.cardGuess.value;//gets user input
   testCard.toLowerCase();
   console.log('test card: ' + testCard);
   // var testCard = cleanInput(e);
@@ -217,7 +224,8 @@ function handlerFunction(event) {
      alert('That card does not exit, try your turn again.');
   } else if (!hasCard) {
     alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
-  } else {
+  }
+   else {
     validateCardAsk(testCard, userHand, demiHand);
     madeSets('user', userHand, userSets);
     // renderHand();
@@ -230,7 +238,7 @@ function handlerFunction(event) {
       }
     } // end of demi's turn
   }
-
+  event.target.cardGuess.value = null; // empties the form field after the data has been grabbed
 } // end function HandlerFunction
 
 //------------------------------
@@ -245,12 +253,3 @@ startHand();
 inputForm.addEventListener('submit', handlerFunction);
 
 
-//redirect login//
-
-// function redirect(){
-//     var login = document.getElementById('reDirect');
-//     login.addEventListener('submit');
-
-// }
-
-//change//
