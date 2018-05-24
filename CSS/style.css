@@ -246,6 +246,7 @@ footer p {
 }
 
 #demi-hands {
+    font-size: 34px;
     grid-area: demi-hands;
     text-align: center;
 }
