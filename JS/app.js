@@ -92,6 +92,7 @@ function randomCard(deckArray) {
 } // end function randomCard
 
 function cleanInput(userInput) {
+
   userInput.toLowerCase
 }; // end function cleanInput
 
@@ -104,24 +105,36 @@ function cardExistsInList(cardName, handArray) {
   return temp;
 }; // end function cardExistsInList
 
-function madeSets(handArray, setsArray) { // takes in an array of the cards we are checking for 4 of a kind
+function arrayList(arr) { // this function helps in testing array contents
+  var arrayList =''; 
+  for(var i in arr) { arrayList += arr[i].name + ', '}; 
+  return arrayList; 
+} // end helper function arrayList, which returns a string of text of the name of cards. 
+
+function madeSets(user, handArray, setsArray) { // takes in an array of the cards we are checking for 4 of a kind
+  console.log(user + ' is testing in madeSets with a hand of ' + arrayList(handArray)); 
+  var nameList = ['a', '2', '3', '4', '5', '6', '7', '9', '10', 'j', 'q', 'k'];
   for (var i in nameList) {
     var match = 0;
     for (var j in handArray) {
       if (handArray[j].name === nameList[i]) {
         match++;
+        console.log('match for ' + nameList[i] + ' is: ' + match);
       }
     } // end loop for all cards in handArray
-    if (match === 4) {
-      tempSets.push(nameList[i]);
-      for (var j in handArray) {
+    if (match === 4) { // currently still at a specific i of nameList
+      console.log('A set was made! ' + user + ' has four ' + nameList[i] + 's!');
+      renderSetMade(handArray[j]); // show or alert user that this card is part of a set! 
+      // tempSets.push(nameList[i]);
+      for (var j = handArray.length - 1; j > -1; j--) {
         if (handArray[j].name === nameList[i]) {
-          renderSetMade(turnNow, handArray[j]); // show or alert user that this card is part of a set! 
-          setsArray.push(handArray.split(i, 1)); // put this object into setsArray, take it out of handArray
+          console.log('Moving ' + handArray[j].name + ' ' + handArray[j].suit + ' to sets array');
+          setsArray.push(handArray.splice(j, 1)[0]); // put this object into setsArray, take it out of handArray
         }
-      }
+      } // end looping through handArray
     } // end of dealing with us having a set of 4 cards. 
   } // end loop for all famous tech names
+  // renderHand() is called after madeSets, so we don't need to do that now. 
 } // end function madeSets
 
 //------------------------------
@@ -182,7 +195,7 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
       turnNow = 'user';
     } else { // turnNow === 'user'
       turnNow = 'demi';
-      console.log('turnNow: ' + turnNow);
+      console.log('next turn by: ' + turnNow);
     }
   } // end who's turn is next
 }; // end function validateCardAsk
@@ -235,13 +248,13 @@ function handlerFunction(event) {
   }
    else {
     validateCardAsk(testCard, userHand, demiHand);
-    // madeSets(userHand, userSets);
-    renderHand();
+    madeSets('user', userHand, userSets);
+    // renderHand();
     if (turnNow === 'demi') {
       // goFish for player's hand
       while (turnNow === 'demi') {
         demiTurn();
-        // madeSets(demiHand, demiSets);
+        madeSets('demi', demiHand, demiSets);
         renderHand();
       }
     } // end of demi's turn
