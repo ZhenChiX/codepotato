@@ -19,16 +19,18 @@ var nameList = ['a','2','3','4','5','6','7','8','9','10','j','q','k'];
   // list of all card names (either famous tech names, or traditional names, or placeholder) 
 var inputForm = document.getElementById('game-form');
 
+
 //------------------------------
 // constructor functions
 //------------------------------
 
-var CardObject = function (name, suits, filePath){
+var CardObject = function (name, suits, filePath) {
   this.name = name;
   this.suit = suits;
   this.filePath = 'IMG/' + this.name + this.suit + '.png';
   fullDeck.push(this);
 }; // end constructor CardObject
+
 
 //------------------------------
 // make card objects
@@ -40,6 +42,7 @@ function populateCards() {
     }; // end names loop
   }; // end suits loop
 } // end function populateCards
+
 
 //------------------------------
 // helper functions
@@ -99,14 +102,6 @@ function madeSets(user, handArray, setsArray) { // takes in an array of the card
 function renderSetMade(user, cardObject) {
   // madeSets is managing the data. We want to alert the user they made a set! 
   // end function renderSetMade
-  // var demiSetsUl = document.getElementById('render-demi-sets');
-  // demiSetsUl.innerHTML = '';
-  // for (var i in demiSets) {
-  //   var demiSetsLi = document.createElement('li');
-  //   demiSetsLi.innerHTML = "<img src=IMG/yellow_back.png>";
-  //   demiSetsUl.append(demiSetsLi);
-
-  // }
 }
 function renderHand() {
   // this function is called whenever the cards held by either User or Demi might change
@@ -141,11 +136,22 @@ function renderHand() {
   var demiSetsUl = document.getElementById('render-demi-sets');
   demiSetsUl.innerHTML = '';
 
- 
-  for (var i in demiSets) {
+
+  for (i = 0; i < demiSets.length; i = i + 4) {
     var demiSetsLi = document.createElement('li');
-    demiSetsLi.innerHTML = "<img src=IMG/yellow_back.png>";
+    demiSetsLi.innerHTML = "<img src=IMG/pile3.png>";
     demiSetsUl.append(demiSetsLi);
+
+  }
+  //player sets
+  var playerSetsUl = document.getElementById('render-player-sets');
+  playerSetsUl.innerHTML = '';
+
+
+  for (i = 0; i < userSets.length; i = i + 4) {
+    var playerSetsLi = document.createElement('li');
+    playerSetsLi.innerHTML = "<img src=IMG/pile3.png>";
+    playerSetsUl.append(playerSetsLi);
 
   }
 }
@@ -192,6 +198,7 @@ function drawCard(playerHand) {
   // playerHand.push(drawPile.splice(draw, 1)); // whoever's hand was passed to us, add to that player's hand and remove from drawPile
 }; // end function drawCard
 
+
 function checkHandEmpty(player, playerHand) { // called with string of player ['user'|'demi'], and the current hand of that player 
   if (drawPile.length > 0 && playerHand.length === 0) {
     var howManyCards = Math.min(5,drawPile.length)
@@ -222,6 +229,8 @@ function checkGameEnd() {
     }
   }
 } // end function checkGameEnd
+
+
 
 
 function startHand() { // deal starting hands to each player. 
@@ -270,6 +279,7 @@ function handlerFunction(event) {
       checkGameEnd(); 
     } // end of demi's turn
   } //ends actions of user and/or demi's turns. 
+
   event.target.cardGuess.value = null; // empties the form field after the data has been grabbed
 }; // end function HandlerFunction
 
