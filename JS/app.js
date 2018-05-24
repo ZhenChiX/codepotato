@@ -15,25 +15,25 @@ var turnNow = 'user'; // will either be 'user' or 'demi'
 var nameList = []; // list of all our famous tech names.
 var inputForm = document.getElementById('game-form');
 
-var suits = ['hearts', 'diamonds','spades', 'clubs'];
+var suits = ['hearts', 'diamonds', 'spades', 'clubs'];
 var wins = 0;
-var names =['a', '2','3','4','5','6','7','8','9','10','j','q','k'];
+var names = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'];
 // var playerHand=[];
 // var opponentHand=[];
 //------------------------------
 // constructor functions
 //------------------------------
 
-var CardObject = function (name, suits, filePath){
+var CardObject = function (name, suits, filePath) {
   this.name = name;
   this.suit = suits;
   this.filePath = 'IMG/' + this.name + this.suit + '.png';
   // fullDeck.push(this);
 }; // end constructor CardObject
 
-for (var i in suits){
-  for (var j in names){
-    
+for (var i in suits) {
+  for (var j in names) {
+
     fullDeck.push(new CardObject(names[j], suits[i]));
   };
 
@@ -144,12 +144,20 @@ function renderHand() {
   var demiSetsUl = document.getElementById('render-demi-sets');
   demiSetsUl.innerHTML = '';
 
- 
-  for (var i in demiSets) {
-    var demiSetsLi = document.createElement('li');
+  for (x = 0; x < demiSets.length; x = x + 4) {
+    var demiSetsLi = document.createElement('li'); t
     demiSetsLi.innerHTML = "<img src=IMG/yellow_back.png>";
     demiSetsUl.append(demiSetsLi);
 
+  }
+  // player sets
+  var playerSetsUl = document.getElementById('render-player-sets');
+  playerSetsUl.innerHTML = '';
+
+  for (j = 0; j < userSets.length; j = j + 4) {
+    var playerSetsLi = document.createElement('li');
+    playerSetsLi.innerHTML = "<img src=IMG/yellow_back.png>";
+    playerSetsUl.append(playerSetsLi);
   }
 }
 
@@ -193,7 +201,7 @@ function drawCard(playerHand) {
 }; // end function drawCard
 
 function demiTurn() {
-  
+
   var testIndex = randomCard(demiHand); // card we will ask for
   emptyDemiHand(drawPile, userHand);
   userHandEmpty(drawPile, demiHand)
@@ -201,8 +209,8 @@ function demiTurn() {
   console.log('demi guess: ' + demiHand[testIndex].name);
 
   validateCardAsk(demiHand[testIndex].name, demiHand, userHand);//where issues are
-  
-  
+
+
 } // end function demiTurn
 
 
@@ -241,7 +249,7 @@ function handlerFunction(event) {
   }
   else {
     validateCardAsk(testCard, userHand, demiHand);
-  
+
     madeSets('user', userHand, userSets);
 
     userHandEmpty(drawPile, demiHand);
@@ -257,13 +265,13 @@ function handlerFunction(event) {
       }
     } // end of demi's turn
   };//ends if real loop
-  if (drawPile.length ===0 && userHand.length ===0 && demiHand.length===0){ //ends game
+  if (drawPile.length === 0 && userHand.length === 0 && demiHand.length === 0) { //ends game
     alert('game over');
-    wins ++;
-//needs results from matches count to determine winner
+    wins++;
+    //needs results from matches count to determine winner
 
 
-};//ends endgame loop
+  };//ends endgame loop
   event.target.cardGuess.value = null; // empties the form field after the data has been grabbed
 }; // end function HandlerFunction
 
@@ -279,26 +287,26 @@ renderHand();
 inputForm.addEventListener('submit', handlerFunction);
 
 // function endGame(drawPile, userHand, opponentHand){
-  
+
 //   if (drawPile.length ===0 && userHand.length ===0 && demiHand.length===0){
 //       alert('game over');
 //   };
 
 // };
-function emptyDemiHand(drawPile, userHand){
-if (drawPile.length > 0 && userHand.length ===0){//check if opposing player has empty hand if game still in play opposing player will draw
-  for (var i = 0; i < drawPile.length; i++){
-    console.log('added one to userHand')
-    drawCard(userHand);
+function emptyDemiHand(drawPile, userHand) {
+  if (drawPile.length > 0 && userHand.length === 0) {//check if opposing player has empty hand if game still in play opposing player will draw
+    for (var i = 0; i < drawPile.length; i++) {
+      console.log('added one to userHand')
+      drawCard(userHand);
+    };
   };
-};
 };//end the function
 
 
-function userHandEmpty(drawPile, demiHand){
-  if (drawPile.length > 0 && demiHand.length ===0){//check if opposing player has empty hand if game still in play opposing player will draw
+function userHandEmpty(drawPile, demiHand) {
+  if (drawPile.length > 0 && demiHand.length === 0) {//check if opposing player has empty hand if game still in play opposing player will draw
     console.log('drawPile.length > 0 && userHand ===0 is true')
-    for (var i = 0; i < drawPile.length; i++){
+    for (var i = 0; i < drawPile.length; i++) {
       drawCard(demiHand);
     }
   };//end for loop

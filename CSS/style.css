@@ -272,6 +272,18 @@ footer p {
     margin: 0px 2px auto;
 }
 
+#player-sets {
+    display: grid;
+    grid-area: player-sets;
+}
+
+#player-sets img {
+    width: 40px;
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px 2px auto;
+}
 #drawPile {
     display: grid;
     grid-area: drawPile;
@@ -281,6 +293,7 @@ footer p {
     background-size: cover;
     margin: 0px auto;
 }
+
 
 /* /////RENDER CARDS AREA///// */
 
