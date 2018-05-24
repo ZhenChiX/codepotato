@@ -41,6 +41,7 @@ for (var i in suits){
 //------------------------------
 // make card objects
 
+
 //------------------------------
 // helper functions
 //------------------------------
@@ -242,8 +243,10 @@ function handlerFunction(event) {
     validateCardAsk(testCard, userHand, demiHand);
   
     madeSets('user', userHand, userSets);
+
     userHandEmpty(drawPile, demiHand);
     emptyDemiHand(drawPile, userHand);
+
 
     renderHand();
     if (turnNow === 'demi') {
