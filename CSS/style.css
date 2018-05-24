@@ -200,12 +200,7 @@ footer p {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: 
-    "demi-sets demi demi-chat"
-    "demi-hands demi-hands demi-hands"
-    ". drawPile ." 
-    "player-hands player-hands player-hands"
-     "player-side player-name player-sets";
+    grid-template-areas: "demi-sets demi demi-chat" "demi-hands demi-hands demi-hands" ". drawPile ." "player-hands player-hands player-hands" "player-side player-name player-sets";
     margin: 0px auto;
     background-image: url("../IMG/tableGreen.png");
     height: 900px;
@@ -225,7 +220,7 @@ footer p {
     /* display: inline-block; */
     background-image: url("../IMG/demismall.jpg");
     background-size: cover;
-    margin: 30px auto;;;
+    margin: 30px auto;
 }
 
 #demi-chat {
@@ -239,15 +234,17 @@ footer p {
     opacity: 0.5;
     /* background: #000000; */
 }
-#demi-hands{
+
+#demi-hands {
     grid-area: demi-hands;
     text-align: center;
-    
 }
-#player-hands{
+
+#player-hands {
     grid-area: player-hands;
     text-align: center;
 }
+
 #drawPile {
     display: grid;
     grid-area: drawPile;
@@ -257,6 +254,16 @@ footer p {
     background-size: cover;
 }
 
+/* /////RENDER CARDS AREA///// */
+
+#render-demi li {
+    display: inline;
+}
+
+#render-player li {
+    display: inline;
+}
+/* /////BOTTOM OF TABLE///// */
 #player-chat {
     display: grid;
     grid-area: player-side;
@@ -275,17 +282,16 @@ footer p {
     height: 30px;
 }
 
-#player-name{
+#player-name {
     grid-area: player-name;
-    margin:20px auto;
+    margin: 20px auto;
 }
 
 #player-side {
-    
     display: grid;
     grid-area: player-side;
     position: relative;
-    bottom: -100px ;
+    bottom: -100px;
 }
 
 #player-sets {
@@ -317,6 +323,7 @@ footer p {
     opacity: 0.6;
     text-align: left;
     overflow: auto;
+    z-index: 2
 }
 
 #rules>h2 {
@@ -355,7 +362,8 @@ footer p {
     margin: 0px auto;
     text-align: center;
 }
-#scoreboard h2{
+
+#scoreboard h2 {
     font-size: 35px;
 }
 
@@ -408,3 +416,7 @@ footer p {
 #score10 {
     animation-delay: 5s;
 }
+
+
+
+/* ///testing only/// */
