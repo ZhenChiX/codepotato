@@ -15,37 +15,44 @@ var turnNow = 'user'; // will either be 'user' or 'demi'
 var nameList = []; // list of all our famous tech names.
 var inputForm = document.getElementById('game-form');
 
-
+var suits = ['hearts', 'diamonds','spades', 'clubs'];
 var wins = 0;
-
+var names =['a', '2','3','4','5','6','7','8','9','10','j','q','k'];
 // var playerHand=[];
 // var opponentHand=[];
 //------------------------------
 // constructor functions
 //------------------------------
-var CardObject = function (name, suit, filePath) {
+
+var CardObject = function (name, suits, filePath) {
   this.name = name;
-  this.suit = suit;
-  this.filePath = filePath;
+  this.suit = suits;
+  this.filePath = this.name + this.suit + '.png';
   fullDeck.push(this);
 }; // end constructor CardObject
 
+for (var i in suits){
+  for (var j in names){
+    
+    fullDeck.push(new CardObject(names[j], suits[i]));
+  };
 
+};
 //------------------------------
 // make card objects
 //------------------------------
-new CardObject('a', 'spades', '../IMG/AS.png');
-new CardObject('a', 'hearts', '../IMG/AH.png');
-new CardObject('a', 'diamonds', '../IMG/AD.png');
-new CardObject('a', 'clubs', '../IMG/AC.png');
-new CardObject('2', 'spades', '../IMG/2S.png');
-new CardObject('2', 'hearts', '../IMG/2H.png');
-new CardObject('2', 'diamonds', '../IMG/2D.png');
-new CardObject('2', 'clubs', '../IMG/2C.png');
-new CardObject('3', 'spades', '../IMG/3S.png');
-new CardObject('3', 'hearts', '../IMG/3H.png');
-new CardObject('3', 'diamonds', '../IMG/3D.png');
-new CardObject('3', 'clubs', '../IMG/3C.png');
+// new CardObject('a', 'spades', '../IMG/AS.png');
+// new CardObject('a', 'hearts', '../IMG/AH.png');
+// new CardObject('a', 'diamonds', '../IMG/AD.png');
+// new CardObject('a', 'clubs', '../IMG/AC.png');
+// new CardObject('2', 'spades', '../IMG/2S.png');
+// new CardObject('2', 'hearts', '../IMG/2H.png');
+// new CardObject('2', 'diamonds', '../IMG/2D.png');
+// new CardObject('2', 'clubs', '../IMG/2C.png');
+// new CardObject('3', 'spades', '../IMG/3S.png');
+// new CardObject('3', 'hearts', '../IMG/3H.png');
+// new CardObject('3', 'diamonds', '../IMG/3D.png');
+// new CardObject('3', 'clubs', '../IMG/3C.png');
 // new CardObject('4', 'spades', '../IMG/4S.png');
 // new CardObject('4', 'hearts', '../IMG/4H.png');
 // new CardObject('4', 'diamonds', '../IMG/4D.png');
@@ -267,6 +274,7 @@ function handlerFunction(event) {
    else {
 
     validateCardAsk(testCard, userHand, demiHand);
+
     if (drawPile.length > 0 && demiHand.length ===0){//check if opposing player has empty hand if game still in play opposing player will draw
       console.log('drawPile.length > 0 && userHand ===0 is true')
       for (var i = 0; i < drawPile.length; i++){
@@ -284,7 +292,7 @@ function handlerFunction(event) {
       }
     } // end of demi's turn
   };//ends if real loop
-  if (drawPile.length ===0 && userHand.length ===0 && demiHand.length===0){
+  if (drawPile.length ===0 && userHand.length ===0 && demiHand.length===0){ //ends game
     alert('game over');
     wins ++;
 //needs results from matches count to determine winner
@@ -312,3 +320,4 @@ inputForm.addEventListener('submit', handlerFunction);
 //   };
 
 // };
+function demiHandEmpty()
