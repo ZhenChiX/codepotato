@@ -5,6 +5,7 @@
     --main-black: #000000;
     --main-white: #ffffff;
     --main-green: #277714;
+    --main-yellow: #f4d742;
 }
 
 /* font-family: 'Orbitron', sans-serif;   for h*/
@@ -27,6 +28,7 @@ p, h1, h2 {
 }
 
 #projectName {
+    color: var(--main-yellow);
     display: block;
     font-weight: bold;
     font-size: 55px;
@@ -241,10 +243,11 @@ footer p {
 }
 
 #demi-hands img {
-    width: 80px;
+    width: 75px;
     height: auto;
     background-repeat: no-repeat;
     background-size: cover;
+    margin: 0px 2px auto;
 }
 
 #player-hands {
@@ -253,19 +256,21 @@ footer p {
 }
 
 #player-hands img {
-    width: 80px;
+    width: 75px;
     height: auto;
     background-repeat: no-repeat;
     background-size: cover;
+    margin: 0px 2px auto;
 }
 
 #drawPile {
     display: grid;
     grid-area: drawPile;
-    background-image: url("../IMG/back_cards-07.png");
-    width: 200px;
-    height: 200px;
+    background-image: url("../IMG/pile3.png");
+    width: 130px;
+    height: 150px;
     background-size: cover;
+    margin: 0px auto;
 }
 
 /* /////RENDER CARDS AREA///// */
@@ -280,6 +285,7 @@ footer p {
 
 /* /////BOTTOM OF TABLE///// */
 
+/* 
 #player-chat {
     display: grid;
     grid-area: player-side;
@@ -289,13 +295,54 @@ footer p {
     border-radius: 20px;
     background: var(--main-black);
     opacity: 0.5;
+} */
+
+#player-chat {
+    display: grid;
+    grid-area: player-side;
+    position: relative;
+    /* background: #00aabb; */
+    height: 80px;
+    width: 250px;
+    border-radius: 0.6em;
+    background: var(--main-black);
+    opacity: 0.5;
+    /* margin-right: 0px; */
+    
 }
 
+#player-chat:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 30px solid transparent;
+    border-left-color: var(--main-black);
+    border-right: 0;
+    border-bottom: 0;
+    margin-top: -20px;
+    margin-right: -30px;
+}
+/* #player-side{
+    position: fixed; */
+/* } */
 #player-input {
     display: grid;
     grid-area: player-input;
-    width: 300px;
+    width: 250px;
     height: 30px;
+    background-color: var(--main-black);
+    color: var(--main-yellow);
+    font-weight: bold;
+    font-family: 'Press Start 2P', cursive;
+    border: 5px solid var(--main-white);
+    /* transform: skewX(-19deg); */
+}
+
+#submit {
+    font-family: 'Press Start 2P', cursive;
 }
 
 #player-name {
@@ -380,6 +427,7 @@ footer p {
 }
 
 #scoreboard h2 {
+    color: var(--main-yellow);
     font-size: 35px;
 }
 
