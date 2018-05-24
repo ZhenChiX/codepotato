@@ -102,14 +102,6 @@ function madeSets(user, handArray, setsArray) { // takes in an array of the card
 function renderSetMade(user, cardObject) {
   // madeSets is managing the data. We want to alert the user they made a set! 
   // end function renderSetMade
-  // var demiSetsUl = document.getElementById('render-demi-sets');
-  // demiSetsUl.innerHTML = '';
-  // for (var i in demiSets) {
-  //   var demiSetsLi = document.createElement('li');
-  //   demiSetsLi.innerHTML = "<img src=IMG/yellow_back.png>";
-  //   demiSetsUl.append(demiSetsLi);
-
-  // }
 }
 function renderHand() {
   // this function is called whenever the cards held by either User or Demi might change

@@ -168,6 +168,13 @@ body {
     opacity: 0.8;
 }
 
+#userName {
+    color: var(--main-black);
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Press Start 2P', cursive;
+}
+
 /* /////FOOTER CSS///// */
 
 footer p {
@@ -189,13 +196,31 @@ footer p {
 
 #nav ul {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     text-align: center;
 }
 
 #nav ul li a {
     text-decoration: none;
-    color: var(--main-black);
+    color: var(--main-yellow);
+    font-family: 'Press Start 2P', cursive;
+    text-shadow: 8px 7px 10px rgba(28, 110, 164, 0.82);
+}
+
+#nav ul li:hover {
+    animation-name: nav;
+    animation-duration: 800ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes nav {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.5);
+    }
 }
 
 #table {
@@ -206,7 +231,7 @@ footer p {
     margin: 0px auto;
     background-image: url("../IMG/tableGreen.png");
     height: 900px;
-    width: 900px;
+    width: 960px;
 }
 
 #demi-sets {
@@ -221,7 +246,6 @@ footer p {
     background-size: cover;
     margin: 0px 2px auto;
 }
-
 
 #player-sets {
     display: grid;
@@ -250,13 +274,29 @@ footer p {
 #demi-chat {
     display: grid;
     grid-area: demi-chat;
-    border: 2px solid var(--main-black);
-    height: 100px;
-    width: 300px;
-    border-radius: 20px;
+    position: relative;
+    height: 80px;
+    width: 250px;
+    border-radius: 0.6em;
     background: var(--main-black);
     opacity: 0.5;
-    /* background: #000000; */
+    
+
+}
+
+#demi-chat:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 30px solid transparent;
+    border-right-color: var(--main-black);
+    border-left: 0;
+    border-bottom: 0;
+    margin-top: -20px;
+    margin-left: -30px;
 }
 
 #demi-hands {
@@ -306,38 +346,25 @@ footer p {
     display: inline;
 }
 
-#render-demi-sets li{
-    display:inline;
-}
-
-#render-player-sets li{
+#render-demi-sets li {
     display: inline;
 }
-/* /////BOTTOM OF TABLE///// */
 
-/* 
-#player-chat {
-    display: grid;
-    grid-area: player-side;
-    border: 2px solid black;
-    height: 100px;
-    width: 300px;
-    border-radius: 20px;
-    background: var(--main-black);
-    opacity: 0.5;
-} */
+#render-player-sets li {
+    display: inline;
+}
+
+/* /////BOTTOM OF TABLE///// */
 
 #player-chat {
     display: grid;
     grid-area: player-side;
     position: relative;
-    /* background: #00aabb; */
     height: 80px;
     width: 250px;
     border-radius: 0.6em;
     background: var(--main-black);
     opacity: 0.5;
-    /* margin-right: 0px; */
 }
 
 #player-chat:after {
@@ -355,11 +382,6 @@ footer p {
     margin-right: -30px;
 }
 
-/* #player-side{
-    position: fixed; */
-
-/* } */
-
 #player-input {
     display: grid;
     grid-area: player-input;
@@ -370,7 +392,7 @@ footer p {
     font-weight: bold;
     font-family: 'Press Start 2P', cursive;
     border: 5px solid var(--main-white);
-    /* transform: skewX(-19deg); */
+   
 }
 
 #submit {
@@ -394,9 +416,6 @@ footer p {
     grid-area: player-sets;
 }
 
-/* #table p {
-    float: right;
-} */
 
 /* /////GO FISH RELATE///// */
 
@@ -405,11 +424,13 @@ footer p {
     position: absolute;
     margin: 20px -30px auto;
     box-sizing: border-box;
+    
 }
 
 #rules {
+    box-shadow: 10px 10px 10px 0px var(--main-white);
     display: show;
-    width: 400px;
+    width: 500px;
     height: 600px;
     position: fixed;
     left: 100px;
@@ -418,7 +439,9 @@ footer p {
     opacity: 0.6;
     text-align: left;
     overflow: auto;
-    z-index: 2
+    z-index: 2 ;
+    
+    
 }
 
 #rules>h2 {
@@ -428,7 +451,10 @@ footer p {
     background-color: var(--main-white);
     text-align: center;
 }
-
+#rules p{
+    font-size: 20px;
+    padding: 1em;
+}
 .close {
     float: right;
     color: var(--main-black);
@@ -461,6 +487,8 @@ footer p {
 #scoreboard h2 {
     color: var(--main-yellow);
     font-size: 35px;
+    text-shadow: 8px 7px 10px rgba(28, 110, 164, 0.82);
+    margin: 20px auto;
 }
 
 .scorelist {
