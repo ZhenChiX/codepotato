@@ -124,7 +124,7 @@ function madeSets(user, handArray, setsArray) { // takes in an array of the card
     } // end loop for all cards in handArray
     if (match === 4) { // currently still at a specific i of nameList
       console.log('A set was made! ' + user + ' has four ' + nameList[i] + 's!');
-      renderSetMade(handArray[j]); // show or alert user that this card is part of a set! 
+      renderSetMade(user, handArray[j]); // show or alert user that this card is part of a set! 
       // tempSets.push(nameList[i]);
       for (var j = handArray.length - 1; j > -1; j--) {
         if (handArray[j].name === nameList[i]) {
@@ -142,8 +142,16 @@ function madeSets(user, handArray, setsArray) { // takes in an array of the card
 //------------------------------
 function renderSetMade(user, cardObject) {
   // madeSets is managing the data. We want to alert the user they made a set! 
-} // end function renderSetMade
+  // end function renderSetMade
+  // var demiSetsUl = document.getElementById('render-demi-sets');
+  // demiSetsUl.innerHTML = '';
+  // for (var i in demiSets) {
+  //   var demiSetsLi = document.createElement('li');
+  //   demiSetsLi.innerHTML = "<img src=IMG/yellow_back.png>";
+  //   demiSetsUl.append(demiSetsLi);
 
+  // }
+}
 function renderHand() {
   // this function is called whenever the cards held by either User or Demi might change
   // it should display the correct number of card backs for demi, and the correct card objects for user
@@ -172,6 +180,17 @@ function renderHand() {
     playerUl.append(playerLi);
 
     // <img src=\'path/img1.jpg\'>
+  }
+  //demi sets 
+  var demiSetsUl = document.getElementById('render-demi-sets');
+  demiSetsUl.innerHTML = '';
+
+ 
+  for (var i in demiSets) {
+    var demiSetsLi = document.createElement('li');
+    demiSetsLi.innerHTML = "<img src=IMG/yellow_back.png>";
+    demiSetsUl.append(demiSetsLi);
+
   }
 }
 
