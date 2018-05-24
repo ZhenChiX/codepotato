@@ -222,6 +222,20 @@ footer p {
     margin: 0px 2px auto;
 }
 
+
+#player-sets {
+    display: grid;
+    grid-area: player-sets;
+}
+
+#player-sets img {
+    width: 40px;
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px 2px auto;
+}
+
 #demi {
     display: grid;
     grid-area: demi;
@@ -294,6 +308,10 @@ footer p {
 
 #render-demi-sets li{
     display:inline;
+}
+
+#render-player-sets li{
+    display: inline;
 }
 /* /////BOTTOM OF TABLE///// */
 
