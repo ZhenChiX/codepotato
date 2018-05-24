@@ -214,6 +214,14 @@ footer p {
     grid-area: demi-sets;
 }
 
+#demi-sets img {
+    width: 40px;
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px 2px auto;
+}
+
 #demi {
     display: grid;
     grid-area: demi;
@@ -283,6 +291,9 @@ footer p {
     display: inline;
 }
 
+#render-demi-sets li{
+    display:inline;
+}
 /* /////BOTTOM OF TABLE///// */
 
 /* 
@@ -308,7 +319,6 @@ footer p {
     background: var(--main-black);
     opacity: 0.5;
     /* margin-right: 0px; */
-    
 }
 
 #player-chat:after {
@@ -325,9 +335,12 @@ footer p {
     margin-top: -20px;
     margin-right: -30px;
 }
+
 /* #player-side{
     position: fixed; */
+
 /* } */
+
 #player-input {
     display: grid;
     grid-area: player-input;
