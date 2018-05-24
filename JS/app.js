@@ -88,7 +88,7 @@ function madeSets(user, handArray, setsArray) { // takes in an array of the card
         if (handArray[j].name === nameList[i]) {
           console.log('Moving ' + handArray[j].name + ' ' + handArray[j].suit + ' to sets array');
           setsArray.push(handArray.splice(j, 1)[0]); // put this object into setsArray, take it out of handArray
-        }
+        } //
       } // end looping through handArray
     } // end of dealing with us having a set of 4 cards. 
   } // end loop for all famous tech names
