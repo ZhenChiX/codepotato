@@ -113,7 +113,7 @@ function arrayList(arr) { // this function helps in testing array contents
 
 function madeSets(user, handArray, setsArray) { // takes in an array of the cards we are checking for 4 of a kind
   console.log(user + ' is testing in madeSets with a hand of ' + arrayList(handArray));
-  var nameList = ['a', '2', '3', '4', '5', '6', '7', '9', '10', 'j', 'q', 'k'];
+  var nameList = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'];
   for (var i in nameList) {
     var match = 0;
     for (var j in handArray) {
@@ -256,7 +256,6 @@ function handlerFunction(event) {
     madeSets('user', userHand, userSets);
     renderHand();
     if (turnNow === 'demi') {
-      // goFish for player's hand
       while (turnNow === 'demi') {
         demiTurn();
         madeSets('demi', demiHand, demiSets);
