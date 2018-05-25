@@ -14,8 +14,24 @@
 
 /* font-family: 'Bungee Inline', cursive;  for title */
 
-p, h1, h2 {
+p, h1 {
     font-family: 'Press Start 2P', cursive;
+}
+
+h2 {
+    color: var(--main-yellow);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 35px;
+    text-shadow: 8px 7px 10px rgba(28, 110, 164, 0.82);
+    /* margin: 20px auto; */
+    text-align: center;
+}
+
+h3 {
+    color: var(--main-yellow);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 17px;
+    text-shadow: 8px 7px 10px rgba(28, 110, 164, 0.82);
 }
 
 #logo {
@@ -43,11 +59,26 @@ p, h1, h2 {
 #hell {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-areas: "logo title" ". nav";
+    grid-template-areas: "logo title" ". social-media";
+}
+
+@media only screen and (max-width: 600px) {
+    #hell {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: "logo" "title" "social-media";
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #socialMedia ul {
+        float: auto;
+    }
 }
 
 #socialMedia {
-    grid-area: nav;
+    grid-area: social-media;
 }
 
 #socialMedia ul {
@@ -55,8 +86,13 @@ p, h1, h2 {
     box-sizing: border-box;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     text-decoration: none;
-    grid-gap: 15px;
+    width: 400px;
     float: right;
+}
+
+#socialMedia ul li {
+    margin: 0px auto;
+    width: 50px;
 }
 
 #facebook {
@@ -197,7 +233,35 @@ footer p {
 #nav ul {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "nav-main nav-result nav-aboutus nav-index";
     text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    #nav ul {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-areas: "nav-main" "nav-result" "nav-aboutus" "nav-index";
+        text-align: left;
+    }
+}
+
+#nav-main {
+    grid-area: nav-main;
+}
+
+#nav-result {
+    grid-area: nav-result;
+}
+
+#nav-aboutus {
+    grid-area: nav-aboutus;
+}
+
+#nav-index {
+    grid-area: nav-index;
 }
 
 #nav ul li a {
@@ -280,8 +344,6 @@ footer p {
     border-radius: 0.6em;
     background: var(--main-black);
     opacity: 0.5;
-    
-
 }
 
 #demi-chat:after {
@@ -326,6 +388,25 @@ footer p {
     margin: 0px 2px auto;
 }
 
+#player-sets {
+    display: grid;
+    grid-area: player-sets;
+}
+
+#player-sets img {
+    width: 40px;
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px 2px auto;
+}
+
+.chatbubble{
+    color:var(--main-yellow);
+    margin:20px auto;
+
+
+}
 #drawPile {
     display: grid;
     grid-area: drawPile;
@@ -392,7 +473,6 @@ footer p {
     font-weight: bold;
     font-family: 'Press Start 2P', cursive;
     border: 5px solid var(--main-white);
-   
 }
 
 #submit {
@@ -416,15 +496,14 @@ footer p {
     grid-area: player-sets;
 }
 
-
 /* /////GO FISH RELATE///// */
 
 #popUp {
     font-weight: bold;
     position: absolute;
-    margin: 20px -30px auto;
+    margin: 20px -120px auto;
     box-sizing: border-box;
-    
+    position: fixed;
 }
 
 #rules {
@@ -439,9 +518,7 @@ footer p {
     opacity: 0.6;
     text-align: left;
     overflow: auto;
-    z-index: 2 ;
-    
-    
+    z-index: 2;
 }
 
 #rules>h2 {
@@ -451,10 +528,12 @@ footer p {
     background-color: var(--main-white);
     text-align: center;
 }
-#rules p{
+
+#rules p {
     font-size: 20px;
     padding: 1em;
 }
+
 .close {
     float: right;
     color: var(--main-black);
@@ -474,6 +553,50 @@ footer p {
 #aboutusbg {
     background-image: url("../IMG/redbg.jpg");
     background-size: cover;
+    /* background-size: 100%; */
+}
+
+#about-us {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: "chris chris chris ." ". chi chi chi" "jon jon jon ." ". tara tara tara";
+    color: var(--main-white);
+}
+
+@media only screen and (max-width: 600px) {
+    #about-us {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-areas: "chris" "chi" "jon" "tara";
+        color: var(--main-white);
+    }
+}
+
+.frame img {
+    width: 150px;
+    height: 150px;
+    border-radius: 40px;
+    box-shadow: 7px 7px 7px grey;
+}
+.frame p{
+    font-size: 15px;
+}
+#chris {
+    grid-area: chris;
+}
+
+#chi {
+    grid-area: chi;
+}
+
+#jon {
+    grid-area: jon;
+}
+
+#tara {
+    grid-area: tara;
 }
 
 /* /////SCOREBOARD PAGE///// */
