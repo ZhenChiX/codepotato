@@ -11,20 +11,21 @@ var userSets = []; // sets of 4 in player's hand
 var fullDeck = [];
 var startHandSize = 5;
 var cardAsk = '';
-var gameEndFlag = false;
+
+var gameEndFlag = false; 
 var turnNow = 'user'; // will either be 'user' or 'demi'
-var userWin = 0; // we can change this if user exists in stored scores and has a running win total
+var userWin  = 0; // we can change this if user exists in stored scores and has a running win total
 var userLose = 0; // we can change this if user exists in stored scores and has a running lose total
-var suits = ['hearts', 'diamonds', 'spades', 'clubs'];
-var nameList = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'];
-// list of all card names (either famous tech names, or traditional names, or placeholder) 
+var suits = ['hearts', 'diamonds','spades', 'clubs'];
+var nameList = ['a','2','3','4','5','6','7','8','9','10','j','q','k'];
+  // list of all card names (either famous tech names, or traditional names, or placeholder) 
 var inputForm = document.getElementById('game-form');
 
 //------------------------------
 // constructor functions
 //------------------------------
 
-var CardObject = function (name, suits, filePath) {
+var CardObject = function (name, suits, filePath){
   this.name = name;
   this.suit = suits;
   this.filePath = 'IMG/' + this.name + this.suit + '.png';
@@ -52,7 +53,8 @@ function randomCard(deckArray) {
 
 function cleanInput(userInput) {
   userInput = userInput.toLowerCase();
-  console.log('we just made input lowercase');
+
+  console.log('we just made input lowercase'); 
   if (userInput === 'a' || userInput === 'ace') {
     userInput = 'a';
     // console.log('a = true')
@@ -69,7 +71,8 @@ function cleanInput(userInput) {
     userInput = 'j';
     // console.log('j = true')
   };
-  return userInput;
+
+  return userInput; 
 } // end function cleanInput
 
 function cardExistsInList(cardName, handArray) {
@@ -118,8 +121,9 @@ function madeSets(user, handArray, setsArray) { // takes in an array of the card
 function renderSetMade(user, cardObject) {
   // madeSets is managing the data. We want to alert the user they made a set! 
   // this is just the alert to the user a set was made
-  var madeCard = cardObject.name.toUpperCase();
-  alert('A set of  " ' + madeCard + ' "  was made by ' + user);
+
+  var madeCard = cardObject.name.toUpperCase(); 
+  alert('A set of  " ' + madeCard + ' "  was made by ' + user); 
 }   // end function renderSetMade
 
 function renderHand() { // called whenever the cards held by either User or Demi might change
@@ -153,7 +157,7 @@ function renderHand() { // called whenever the cards held by either User or Demi
   var demiSetsUl = document.getElementById('render-demi-sets');
   demiSetsUl.innerHTML = '';
 
-
+ 
   for (i = 0; i < demiSets.length; i = i + 4) {
     var demiSetsLi = document.createElement('li');
     demiSetsLi.innerHTML = "<img src=IMG/pile3.png>";
@@ -208,6 +212,7 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
 
     drawCard(playerHand);
     // alert('Hey ' + turnNow + ', Go Fish!'); 
+
     if (turnNow === 'demi') {
       turnNow = 'user';
     } else { // turnNow === 'user'
@@ -222,6 +227,7 @@ function demiTurn() {
   var demiP = document.getElementById('demi-bubble');
   demiP.textContent = 'Demi asked for "' + demiHand[testIndex].name + '" WOOF!';
   console.log('demi guess: ' + demiHand[testIndex].name);
+
   validateCardAsk(demiHand[testIndex].name, demiHand, userHand);
 } // end function demiTurn
 
@@ -234,34 +240,34 @@ function drawCard(playerHand) {
 }; // end function drawCard
 
 function checkHandEmpty(player, playerHand) { // called with string of player ['user'|'demi'], and the current hand of that player 
-  if (drawPile.length > 0 && playerHand.length === 0) {
-    var howManyCards = Math.min(5, drawPile.length)
-    for (var i = 0; i < howManyCards; i++) {
-      console.log(player + ' draws a card.');
-      drawCard(playerHand);
-    } // draw cards until deck is empty or player gets 5 cards. 
-  } // end if we need to draw cards for this player. 
+if (drawPile.length > 0 && playerHand.length === 0) {
+  var howManyCards = Math.min(5,drawPile.length)
+  for (var i = 0; i < howManyCards; i++){
+    console.log(player + ' draws a card.'); 
+    drawCard(playerHand);
+  } // draw cards until deck is empty or player gets 5 cards. 
+} // end if we need to draw cards for this player. 
 } // end function checkHandEmpty
 
 function setCount(playerSets) {
-  return playerSets.length / 4;
+  return playerSets.length / 4; 
 } // end function setCount
 
 function checkGameEnd() {
-  if (drawPile.length === 0 && userHand.length === 0 && demiHand.length === 0) { //ends game
+  if (drawPile.length === 0 && userHand.length === 0 && demiHand.length === 0){ //ends game
     alert('game over');
-    gameEndFlag = true;
-    if (setCount(userSets) > setCount(demiSets)) {
+    gameEndFlag = true; 
+    if (setCount(userSets) > setCount(demiSets)) { 
       alert('User Wins!');
-      userWin++;
+      userWin++; 
     } else if (setCount(demiSets) > setCount(userSets)) {
-      alert('Demi Wins and Woofs in your Face!');
-      userLose++;
+      alert('Demi Wins and Woofs in your Face!'); 
+      userLose++; 
     } else {
-      alert('I don\'t know how to tell who won!');
+      alert('I don\'t know how to tell who won!'); 
     }
-    recordUserHistory();
-    alert('User has a total of ' + userWin + ' wins, and a total of ' + userLose + ' losses.');
+    recordUserHistory(); 
+    alert('User has a total of '+ userWin + ' wins, and a total of ' + userLose + ' losses.'); 
   } // end of condition test of the end of the game. 
 } // end function checkGameEnd
 
@@ -315,6 +321,7 @@ function handlerFunction(event) {
     testCard = 'j';
     // console.log('j = true')
   };
+
   var realCard = cardExistsInList(testCard, fullDeck); // returns true if in fullDeck
   var hasCard = cardExistsInList(testCard, userHand); // returns true if in asker's hand
   if (!realCard) {
@@ -322,20 +329,20 @@ function handlerFunction(event) {
   } else if (!hasCard) {
     alert('Hey cheater, you can\'t ask for a card that is not in your hand, try again.');
   }
-  else {
+  else { 
     validateCardAsk(testCard, userHand, demiHand);
     madeSets('user', userHand, userSets);
-    checkHandEmpty('user', userHand);
-    checkHandEmpty('demi', demiHand);
+    checkHandEmpty('user', userHand); 
+    checkHandEmpty('demi', demiHand); 
     renderHand();
     checkGameEnd(); // if game should end, send flag so demi does not try to take a turn. 
     while (turnNow === 'demi' && !gameEndFlag) {
       demiTurn();
       madeSets('demi', demiHand, demiSets);
-      checkHandEmpty('user', userHand);
-      checkHandEmpty('demi', demiHand);
+      checkHandEmpty('user', userHand); 
+      checkHandEmpty('demi', demiHand); 
       renderHand();
-      checkGameEnd();
+      checkGameEnd(); 
     } // end of demi's turn
   } //ends actions of user and/or demi's turns. 
   event.target.cardGuess.value = null; // empties the form field after the data has been grabbed
