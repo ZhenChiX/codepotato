@@ -18,7 +18,8 @@ var suits = ['hearts', 'diamonds', 'spades', 'clubs'];
 var nameList = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'];
 // list of all card names (either famous tech names, or traditional names, or placeholder) 
 var inputForm = document.getElementById('game-form');
-
+var HoldsGoFish;
+var goFish = false;
 //------------------------------
 // constructor functions
 //------------------------------
@@ -178,10 +179,17 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
       playerHand.push(opponentHand[i]); //why we are only getting one card
       opponentHand.splice(i, 1);
       anotherTurn = true;
+      // HoldsGoFish = testCard;
+      var goFishP = document.getElementById('go-fish');
+      goFishP.textContent = 'ruff ruff you took my '+ testCard + '\'s!';
+      
       // console.log('go again!');
     } // end if testCard matches current card
   } // end loop through opponent's hand
   if (anotherTurn === false) {
+    var goFishP = document.getElementById('go-fish');
+    goFishP.textContent = 'go fish';
+    
     drawCard(playerHand);
     // renderGoFish();
     if (turnNow === 'demi') {
@@ -196,7 +204,19 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
 function demiTurn() {
   var testIndex = randomCard(demiHand); // card we will ask for will be this index position out of demiHand
   var demiP = document.getElementById('demi-bubble');
-  demiP.textContent = 'Demi ask for ' +demiHand[testIndex].name;
+  if (demiHand[testIndex].name ==='a'){
+    demiHand[testIndex].name = 'ACE';
+  };
+  if (demiHand[testIndex].name ==='k'){
+    demiHand[testIndex].name = 'KINGS';
+  };
+  if (demiHand[testIndex].name ==='q'){
+    demiHand[testIndex].name = 'QUEENS';
+  };
+  if (demiHand[testIndex].name ==='j'){
+    demiHand[testIndex].name = 'JACKS';
+  }
+  demiP.textContent = 'Ruff Ruff Demi asks for ' +demiHand[testIndex].name;
   
 
   console.log('demi guess: ' + demiHand[testIndex].name);
@@ -267,34 +287,39 @@ function startHand() { // deal starting hands to each player.
 // event handlers
 //------------------------------
 function handlerFunction(event) {
+  // var goFishP = document.getElementById('go-fish');
+  // goFishP.innerHTML='';
   event.preventDefault();
   var testCard = event.target.cardGuess.value.toLowerCase();
-  if (testCard === 'a' || testCard === 'ace') {
+  var userP = document.getElementById('player-bubble');
+  console.log('test card: ' + testCard);
+  userP.textContent ='Do you have any ' + testCard + '\'s';
+
+  if (testCard === 'a' || testCard === 'ace' || testCard === 'aces') {
     testCard = 'a';
     // console.log('a = true')
   }
-  if (testCard === 'k' || testCard === 'king') {
+  if (testCard === 'k' || testCard === 'king' || testCard === 'kings') {
     testCard = 'k';
     // console.log('k = true')
   }
-  if (testCard === 'q' || testCard === 'queen') {
+  if (testCard === 'q' || testCard === 'queen' || testCard === 'queens') {
     testCard = 'q';
     // console.log('q = true')
   }
 
-  if (testCard === 'j' || testCard === 'jack') {
+  if (testCard === 'j' || testCard === 'jack' || testCard === 'jacks') {
     testCard = 'j';
     // console.log('j = true')
   };
   // testCard = cleanInput(testCard);
-  console.log('test card: ' + testCard);
 
   var realCard = cardExistsInList(testCard, fullDeck); // returns true if in fullDeck
   var hasCard = cardExistsInList(testCard, userHand); // returns true if in asker's hand
   if (!realCard) {
     alert('That card does not exit, try your turn again.');
   } else if (!hasCard) {
-    alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
+    alert('Hey cheater, you can\'t ask for a card that isn\'t in your hand, try again.');
   }
   else {
     validateCardAsk(testCard, userHand, demiHand);
@@ -304,6 +329,11 @@ function handlerFunction(event) {
     renderHand();
     checkGameEnd();
     while (turnNow === 'demi') {
+      //render go fish
+
+
+
+
       demiTurn();
       madeSets('demi', demiHand, demiSets);
       checkHandEmpty('user', userHand);
