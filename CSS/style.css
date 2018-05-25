@@ -327,12 +327,13 @@ footer p {
 #demi {
     display: grid;
     grid-area: demi;
-    width: 100px;
-    height: 100px;
-    /* display: inline-block; */
+    width: 150px;
+    height: 150px;
     background-image: url("../IMG/demismall.jpg");
     background-size: cover;
-    margin: 30px auto;
+    margin: 10px auto;
+    border-radius: 30px;
+    box-shadow: 7px 7px 7px grey;
 }
 
 #demi-chat {
@@ -401,12 +402,11 @@ footer p {
     margin: 0px 2px auto;
 }
 
-.chatbubble{
-    color:var(--main-yellow);
-    margin:20px auto;
-
-
+.chatbubble {
+    color: var(--main-yellow);
+    margin: 20px auto;
 }
+
 #drawPile {
     display: grid;
     grid-area: drawPile;
@@ -481,7 +481,13 @@ footer p {
 
 #player-name {
     grid-area: player-name;
-    margin: 20px auto;
+    width: 120px;
+    height: 120px;
+    background-image: url("../IMG/cflogo.png");
+    background-size: cover;
+    margin: 10px auto;
+    border-radius: 30px;
+    box-shadow: 7px 7px 7px grey;
 }
 
 #player-side {
@@ -580,9 +586,15 @@ footer p {
     border-radius: 40px;
     box-shadow: 7px 7px 7px grey;
 }
-.frame p{
+
+.frame p {
     font-size: 15px;
+    background-color: var(--main-black);
+    opacity: 0.6;
+    transform: skew(-10deg);
+    box-shadow: 7px 7px 7px grey;
 }
+
 #chris {
     grid-area: chris;
 }
