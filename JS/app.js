@@ -13,6 +13,7 @@ var startHandSize = 5;
 var cardAsk = '';
 var gameEndFlag = false; 
 var turnNow = 'user'; // will either be 'user' or 'demi'
+var currentUser; 
 var userWin  = 0; // we can change this if user exists in stored scores and has a running win total
 var userLose = 0; // we can change this if user exists in stored scores and has a running lose total
 var suits = ['hearts', 'diamonds','spades', 'clubs'];
@@ -192,7 +193,7 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
   // console.log('anotherTurn: ' + anotherTurn);
   for (var i = opponentHand.length - 1; i > -1; i--) {
     if (testCard === opponentHand[i].name) {
-      playerHand.push(opponentHand[i]); //why we are only getting one card
+      playerHand.push(opponentHand[i]); 
       opponentHand.splice(i, 1);
       anotherTurn = true;
       // console.log('go again!');
@@ -207,7 +208,10 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
       turnNow = 'demi';
       console.log('next turn by: ' + turnNow);
     }
-  } // end who's turn is next
+  } else { // anotherTurn === true; 
+    alert('Successful guess, so get another turn!'); 
+  }
+  // end who's turn is next
 }; // end function validateCardAsk
 
 function demiTurn() {
@@ -242,6 +246,7 @@ function setCount(playerSets) {
 
 function checkGameEnd() {
   if (drawPile.length === 0 && userHand.length === 0 && demiHand.length === 0){ //ends game
+    renderHand(); 
     alert('game over');
     gameEndFlag = true; 
     if (setCount(userSets) > setCount(demiSets)) { 
@@ -261,6 +266,26 @@ function checkGameEnd() {
 function recordUserHistory() {
   // We could read local storage for the user's win/lose history. 
   // then we can store the user's, and all other user's, history back for the results page. 
+  // Already global variables: userWin, userLose
+  var userNameArray = '';
+  var userWinsArray = '';
+  var userLossesArray = '';
+  if (localStorage.currentUser && localStorage.localUserName) {
+    currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    userNameArray = JSON.parse(localStorage.getItem('localUserName')); // Check if username already exists
+    userWinsArray = JSON.parse(localStorage.getItem('localWins'));
+    userLossesArray = JSON.parse(localStorage.getItem('localLosses'));
+    for (var i in userNameArray) {
+      if(currentUser = userNameArray[i]) {
+        userNameArray[i] = currentUser;
+        userWinsArray[i] = userWinsArray[i] + userWin; 
+        userLossesArray[i] = userLossesArray[i] + userLose; 
+      } // if we are at the postion that currentUser has their game history stored, store their win/lose history at this index  
+    } // done looping through each 'column' of dataStorage. 
+    localStorage.setItem('localUserName', JSON.stringify(userNameArray));
+    localStorage.setItem('localWins', JSON.stringify(userWinsArray));
+    localStorage.setItem('localLosses', JSON.stringify(userLossesArray));
+  } // end if we have a localStorage user. 
 } // end function recordUserHistory 
 
 function startHand() { // deal starting hands to each player. 
@@ -295,19 +320,20 @@ function handlerFunction(event) {
   else { 
     validateCardAsk(testCard, userHand, demiHand);
     madeSets('user', userHand, userSets);
+    renderHand();
     checkHandEmpty('user', userHand); 
     checkHandEmpty('demi', demiHand); 
-    renderHand();
     checkGameEnd(); // if game should end, send flag so demi does not try to take a turn. 
     while (turnNow === 'demi' && !gameEndFlag) {
       demiTurn();
       madeSets('demi', demiHand, demiSets);
+      renderHand();
       checkHandEmpty('user', userHand); 
       checkHandEmpty('demi', demiHand); 
-      renderHand();
       checkGameEnd(); 
     } // end of demi's turn
   } //ends actions of user and/or demi's turns. 
+  if(gameEndFlag) {renderHand(); }
   event.target.cardGuess.value = null; // empties the form field after the data has been grabbed
 }; // end function HandlerFunction
 
@@ -323,4 +349,3 @@ renderHand();
 // event listeners
 //------------------------------
 inputForm.addEventListener('submit', handlerFunction);
-
