@@ -196,7 +196,7 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
 function demiTurn() {
   var testIndex = randomCard(demiHand); // card we will ask for will be this index position out of demiHand
   var demiP = document.getElementById('demi-bubble');
-  demiP.textContent = 'Demi ask for ' +demiHand[testIndex].name;
+  demiP.textContent = 'Demi ask for "' + demiHand[testIndex].name+'" WOOF!';
   
 
   console.log('demi guess: ' + demiHand[testIndex].name);
