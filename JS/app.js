@@ -18,8 +18,7 @@ var suits = ['hearts', 'diamonds', 'spades', 'clubs'];
 var nameList = ['a', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'];
 // list of all card names (either famous tech names, or traditional names, or placeholder) 
 var inputForm = document.getElementById('game-form');
-var HoldsGoFish;
-var goFish = false;
+
 //------------------------------
 // constructor functions
 //------------------------------
@@ -204,20 +203,20 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
 function demiTurn() {
   var testIndex = randomCard(demiHand); // card we will ask for will be this index position out of demiHand
   var demiP = document.getElementById('demi-bubble');
-
-  if (demiHand[testIndex].name ==='a'){
-    demiHand[testIndex].name = 'ACE';
+var demiSpeaks = demiHand[testIndex].name 
+  if (demiSpeaks ==='a'){
+    demiSpeaks = 'ACE';
   };
-  if (demiHand[testIndex].name ==='k'){
-    demiHand[testIndex].name = 'KINGS';
+  if (demiSpeaks ==='k'){
+    demiSpeaks = 'KINGS';
   };
-  if (demiHand[testIndex].name ==='q'){
-    demiHand[testIndex].name = 'QUEENS';
+  if (demiSpeaks ==='q'){
+    demiSpeaks = 'QUEENS';
   };
-  if (demiHand[testIndex].name ==='j'){
-    demiHand[testIndex].name = 'JACKS';
+  if (demiSpeaks ==='j'){
+    demiSpeaks = '';
   }
-  demiP.textContent = 'Ruff Ruff Demi asks for ' +demiHand[testIndex].name;
+  demiP.textContent = 'Ruff Ruff Demi asked for ' +demiSpeaks;
 
 
   console.log('demi guess: ' + demiHand[testIndex].name);
