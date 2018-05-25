@@ -1,7 +1,7 @@
 # Tech Casino
 
 **Authors**:
-* Chi Wu
+* ZhenChi Wu
 * Chris Chapman
 * Jon DiQuattro
 * Tara Johnson

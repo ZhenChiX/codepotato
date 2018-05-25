@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 
 //------------------------------
 // global variables
@@ -11,6 +11,7 @@ var userSets = []; // sets of 4 in player's hand
 var fullDeck = [];
 var startHandSize = 5;
 var cardAsk = '';
+var gameEndFlag = false;
 var turnNow = 'user'; // will either be 'user' or 'demi'
 var userWin = 0; // we can change this if user exists in stored scores and has a running win total
 var userLose = 0; // we can change this if user exists in stored scores and has a running lose total
@@ -30,7 +31,6 @@ var CardObject = function (name, suits, filePath) {
   fullDeck.push(this);
 }; // end constructor CardObject
 
-
 //------------------------------
 // make card objects
 
@@ -42,7 +42,6 @@ function populateCards() {
   }; // end suits loop
 } // end function populateCards
 
-
 //------------------------------
 // helper functions
 //------------------------------
@@ -52,7 +51,25 @@ function randomCard(deckArray) {
 } // end function randomCard
 
 function cleanInput(userInput) {
-  userInput.toLowerCase();
+  userInput = userInput.toLowerCase();
+  console.log('we just made input lowercase');
+  if (userInput === 'a' || userInput === 'ace') {
+    userInput = 'a';
+    // console.log('a = true')
+  }
+  if (userInput === 'k' || userInput === 'king') {
+    userInput = 'k';
+    // console.log('k = true')
+  }
+  if (userInput === 'q' || userInput === 'queen') {
+    userInput = 'q';
+    // console.log('q = true')
+  }
+  if (userInput === 'j' || userInput === 'jack') {
+    userInput = 'j';
+    // console.log('j = true')
+  };
+  return userInput;
 } // end function cleanInput
 
 function cardExistsInList(cardName, handArray) {
@@ -100,13 +117,14 @@ function madeSets(user, handArray, setsArray) { // takes in an array of the card
 //------------------------------
 function renderSetMade(user, cardObject) {
   // madeSets is managing the data. We want to alert the user they made a set! 
-  // end function renderSetMade
-}
-function renderHand() {
-  // this function is called whenever the cards held by either User or Demi might change
-  // it should display the correct number of card backs for demi, and the correct card objects for user
-  // probably it should also adjust the draw pile. 
-  // end function renderHand
+  // this is just the alert to the user a set was made
+  var madeCard = cardObject.name.toUpperCase();
+  alert('A set of  " ' + madeCard + ' "  was made by ' + user);
+}   // end function renderSetMade
+
+function renderHand() { // called whenever the cards held by either User or Demi might change
+  // it should display the number number of card backs for demi, and the correct card object filepaths for user
+  // it also displays card stacks for sets made, and probably this i were we adjust the draw pile. 
 
   //Render DEMI HAND
   var demiUl = document.getElementById('render-demi');
@@ -161,9 +179,8 @@ function renderHand() {
   // playerLi.textContent = userHand[i].name;
   // var demiP = document.getElementById('demi-bubble');
   // demiP.textContent = demiHand[testIndex].name;
+} // end function renderHand
 
-
-}
 //------------------------------
 // main functions
 //------------------------------
@@ -178,12 +195,19 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
       playerHand.push(opponentHand[i]); //why we are only getting one card
       opponentHand.splice(i, 1);
       anotherTurn = true;
+      // HoldsGoFish = testCard;
+      var goFishP = document.getElementById('go-fish');
+      goFishP.textContent = 'ruff ruff you took my ' + testCard + '\'s!';
+
       // console.log('go again!');
     } // end if testCard matches current card
   } // end loop through opponent's hand
   if (anotherTurn === false) {
+    var goFishP = document.getElementById('go-fish');
+    goFishP.textContent = 'go fish';
+
     drawCard(playerHand);
-    // renderGoFish();
+    // alert('Hey ' + turnNow + ', Go Fish!'); 
     if (turnNow === 'demi') {
       turnNow = 'user';
     } else { // turnNow === 'user'
@@ -196,28 +220,21 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
 function demiTurn() {
   var testIndex = randomCard(demiHand); // card we will ask for will be this index position out of demiHand
   var demiP = document.getElementById('demi-bubble');
-  demiP.textContent = 'Demi ask for "' + demiHand[testIndex].name+'" WOOF!';
-  
-
+  demiP.textContent = 'Demi asked for "' + demiHand[testIndex].name + '" WOOF!';
   console.log('demi guess: ' + demiHand[testIndex].name);
-  validateCardAsk(demiHand[testIndex].name, demiHand, userHand);//where issues are
+  validateCardAsk(demiHand[testIndex].name, demiHand, userHand);
 } // end function demiTurn
+
 
 function drawCard(playerHand) {
   var draw = randomCard(drawPile); // randomly select card from drawPile
-  
-  // var playerP = document.getElementById('player-bubble');
-  // playerP.textContent = userHand[testIndex].name;
-  
   playerHand.push(drawPile[draw]);
   drawPile.splice(draw, 1);
   // playerHand.push(drawPile.splice(draw, 1)); // whoever's hand was passed to us, add to that player's hand and remove from drawPile
 }; // end function drawCard
 
-
 function checkHandEmpty(player, playerHand) { // called with string of player ['user'|'demi'], and the current hand of that player 
-// demiP.innerHTML='';
-if (drawPile.length > 0 && playerHand.length === 0) {
+  if (drawPile.length > 0 && playerHand.length === 0) {
     var howManyCards = Math.min(5, drawPile.length)
     for (var i = 0; i < howManyCards; i++) {
       console.log(player + ' draws a card.');
@@ -228,27 +245,30 @@ if (drawPile.length > 0 && playerHand.length === 0) {
 
 function setCount(playerSets) {
   return playerSets.length / 4;
-}
+} // end function setCount
+
 function checkGameEnd() {
   if (drawPile.length === 0 && userHand.length === 0 && demiHand.length === 0) { //ends game
     alert('game over');
+    gameEndFlag = true;
     if (setCount(userSets) > setCount(demiSets)) {
       alert('User Wins!');
       userWin++;
-      alert('User has a total of ' + userWin + ' wins, and a total of ' + userLose + ' losses.');
     } else if (setCount(demiSets) > setCount(userSets)) {
       alert('Demi Wins and Woofs in your Face!');
       userLose++;
-      alert('User has a total of ' + userWin + ' wins, and a total of ' + userLose + ' losses.');
     } else {
       alert('I don\'t know how to tell who won!');
-      alert('User has a total of ' + userWin + ' wins, and a total of ' + userLose + ' losses.');
     }
-  }
+    recordUserHistory();
+    alert('User has a total of ' + userWin + ' wins, and a total of ' + userLose + ' losses.');
+  } // end of condition test of the end of the game. 
 } // end function checkGameEnd
 
-
-
+function recordUserHistory() {
+  // We could read local storage for the user's win/lose history. 
+  // then we can store the user's, and all other user's, history back for the results page. 
+} // end function recordUserHistory 
 
 function startHand() { // deal starting hands to each player. 
   drawPile = fullDeck.slice();
@@ -262,39 +282,45 @@ function startHand() { // deal starting hands to each player.
   };
 }; // end function startHand
 
-
 //------------------------------
 // event handlers
 //------------------------------
 function handlerFunction(event) {
+  // var goFishP = document.getElementById('go-fish');
+  // goFishP.innerHTML='';
   event.preventDefault();
+  var testCard = event.target.cardGuess.value;//gets user input
+  //testCard.toLowerCase();
+  testCard = cleanInput(testCard);
+  console.log('test card: ' + testCard);
   var testCard = event.target.cardGuess.value.toLowerCase();
-  if (testCard === 'a' || testCard === 'ace') {
+  var userP = document.getElementById('player-bubble');
+  console.log('test card: ' + testCard);
+  var userGoFish = document.getElementById('player-go-fish');
+  userGoFish.textContent = 'Go Fish';
+  userP.textContent = 'Do you have any ' + testCard + '\'s';
+  if (testCard === 'a' || testCard === 'ace' || testCard === 'aces') {
     testCard = 'a';
     // console.log('a = true')
   }
-  if (testCard === 'k' || testCard === 'king') {
+  if (testCard === 'k' || testCard === 'king' || testCard === 'kings') {
     testCard = 'k';
     // console.log('k = true')
   }
-  if (testCard === 'q' || testCard === 'queen') {
+  if (testCard === 'q' || testCard === 'queen' || testCard === 'queens') {
     testCard = 'q';
     // console.log('q = true')
   }
-
-  if (testCard === 'j' || testCard === 'jack') {
+  if (testCard === 'j' || testCard === 'jack' || testCard === 'jacks') {
     testCard = 'j';
     // console.log('j = true')
   };
-  // testCard = cleanInput(testCard);
-  console.log('test card: ' + testCard);
-
   var realCard = cardExistsInList(testCard, fullDeck); // returns true if in fullDeck
   var hasCard = cardExistsInList(testCard, userHand); // returns true if in asker's hand
   if (!realCard) {
-    alert('That card does not exit, try your turn again.');
+    alert('That card does not exit, or I misunderstood you, try your turn again.');
   } else if (!hasCard) {
-    alert('Hey cheater, you can\'t ask for a card already in your hand, try again.');
+    alert('Hey cheater, you can\'t ask for a card that is not in your hand, try again.');
   }
   else {
     validateCardAsk(testCard, userHand, demiHand);
@@ -302,8 +328,8 @@ function handlerFunction(event) {
     checkHandEmpty('user', userHand);
     checkHandEmpty('demi', demiHand);
     renderHand();
-    checkGameEnd();
-    while (turnNow === 'demi') {
+    checkGameEnd(); // if game should end, send flag so demi does not try to take a turn. 
+    while (turnNow === 'demi' && !gameEndFlag) {
       demiTurn();
       madeSets('demi', demiHand, demiSets);
       checkHandEmpty('user', userHand);
@@ -312,13 +338,13 @@ function handlerFunction(event) {
       checkGameEnd();
     } // end of demi's turn
   } //ends actions of user and/or demi's turns. 
-
   event.target.cardGuess.value = null; // empties the form field after the data has been grabbed
 }; // end function HandlerFunction
 
 //------------------------------
 // on load
 //------------------------------
+
 populateCards();
 startHand();
 renderHand();
@@ -327,4 +353,3 @@ renderHand();
 // event listeners
 //------------------------------
 inputForm.addEventListener('submit', handlerFunction);
-
