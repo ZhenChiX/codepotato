@@ -16,7 +16,8 @@ function reDirect() {
 // Save username to local store
 var inputForm = document.getElementById('loginForm');
 var userNameArray = [];
-console.log(userNameArray.length);
+var userWinsArray = [];
+var userLossesArray = [];
 
 function saveUserName(event) {
     var returnPlayer = false;
@@ -24,7 +25,9 @@ function saveUserName(event) {
     var userName = document.getElementById('userName').value;
     if (localStorage.localUserName){
         // alert('Local storage exists');
-        userNameArray = JSON.parse(localStorage.getItem('localUserName')); // TODO: Check if username already exists
+        userNameArray = JSON.parse(localStorage.getItem('localUserName')); // Check if username already exists
+        userWinsArray = JSON.parse(localStorage.getItem('localWins'));
+        userLossesArray = JSON.parse(localStorage.getItem('localLosses'));
         for (var i in userNameArray){
             if (userName === userNameArray[i]){
                 alert('Welcome back!');
@@ -37,9 +40,14 @@ function saveUserName(event) {
     if (returnPlayer === false){
         alert('Good luck!');
         userNameArray.push(userName);
+        userWinsArray.push('0');
+        userLossesArray.push('0');
     };
-
+    
     localStorage.setItem('localUserName', JSON.stringify(userNameArray));
+    localStorage.setItem('localWins', JSON.stringify(userWinsArray));
+    localStorage.setItem('localLosses', JSON.stringify(userLossesArray));
+    localStorage.setItem('currentUser', JSON.stringify(userName));
     window.location.href = 'main.html';
 }
 
