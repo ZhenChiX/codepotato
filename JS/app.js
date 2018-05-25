@@ -207,7 +207,7 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
     goFishP.textContent = 'go fish';
     
     drawCard(playerHand);
-    alert('Hey ' + turnNow + ', Go Fish!'); 
+    // alert('Hey ' + turnNow + ', Go Fish!'); 
     if (turnNow === 'demi') {
       turnNow = 'user';
     } else { // turnNow === 'user'
