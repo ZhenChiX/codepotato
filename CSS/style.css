@@ -340,7 +340,7 @@ footer p {
     display: grid;
     grid-area: demi-chat;
     position: relative;
-    height: 80px;
+    height: 130px;
     width: 250px;
     border-radius: 0.6em;
     background: var(--main-black);
@@ -404,7 +404,7 @@ footer p {
 
 .chatbubble {
     color: var(--main-yellow);
-    margin: 20px auto;
+    margin: 5px auto;
 }
 
 #drawPile {
@@ -441,7 +441,7 @@ footer p {
     display: grid;
     grid-area: player-side;
     position: relative;
-    height: 80px;
+    height: 130px;
     width: 250px;
     border-radius: 0.6em;
     background: var(--main-black);

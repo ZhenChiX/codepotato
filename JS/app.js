@@ -11,6 +11,7 @@ var userSets = []; // sets of 4 in player's hand
 var fullDeck = [];
 var startHandSize = 5;
 var cardAsk = '';
+
 var gameEndFlag = false; 
 var turnNow = 'user'; // will either be 'user' or 'demi'
 var userWin  = 0; // we can change this if user exists in stored scores and has a running win total
@@ -52,6 +53,7 @@ function randomCard(deckArray) {
 
 function cleanInput(userInput) {
   userInput = userInput.toLowerCase();
+
   console.log('we just made input lowercase'); 
   if (userInput === 'a' || userInput === 'ace') {
     userInput = 'a';
@@ -69,6 +71,7 @@ function cleanInput(userInput) {
     userInput = 'j';
     // console.log('j = true')
   };
+
   return userInput; 
 } // end function cleanInput
 
@@ -118,6 +121,7 @@ function madeSets(user, handArray, setsArray) { // takes in an array of the card
 function renderSetMade(user, cardObject) {
   // madeSets is managing the data. We want to alert the user they made a set! 
   // this is just the alert to the user a set was made
+
   var madeCard = cardObject.name.toUpperCase(); 
   alert('A set of  " ' + madeCard + ' "  was made by ' + user); 
 }   // end function renderSetMade
@@ -195,12 +199,20 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
       playerHand.push(opponentHand[i]); //why we are only getting one card
       opponentHand.splice(i, 1);
       anotherTurn = true;
+      // HoldsGoFish = testCard;
+      var goFishP = document.getElementById('go-fish');
+      goFishP.textContent = 'ruff ruff you took my ' + testCard + '\'s!';
+
       // console.log('go again!');
     } // end if testCard matches current card
   } // end loop through opponent's hand
   if (anotherTurn === false) {
+    var goFishP = document.getElementById('go-fish');
+    goFishP.textContent = 'go fish';
+
     drawCard(playerHand);
-    alert('Hey ' + turnNow + ', Go Fish!'); 
+    // alert('Hey ' + turnNow + ', Go Fish!'); 
+
     if (turnNow === 'demi') {
       turnNow = 'user';
     } else { // turnNow === 'user'
@@ -213,8 +225,9 @@ function validateCardAsk(testCard, playerHand, opponentHand) { // takes cardAsk
 function demiTurn() {
   var testIndex = randomCard(demiHand); // card we will ask for will be this index position out of demiHand
   var demiP = document.getElementById('demi-bubble');
-  demiP.textContent = 'Demi ask for "' + demiHand[testIndex].name+'" WOOF!';
-    console.log('demi guess: ' + demiHand[testIndex].name);
+  demiP.textContent = 'Demi asked for "' + demiHand[testIndex].name + '" WOOF!';
+  console.log('demi guess: ' + demiHand[testIndex].name);
+
   validateCardAsk(demiHand[testIndex].name, demiHand, userHand);
 } // end function demiTurn
 
@@ -279,11 +292,35 @@ function startHand() { // deal starting hands to each player.
 // event handlers
 //------------------------------
 function handlerFunction(event) {
+  // var goFishP = document.getElementById('go-fish');
+  // goFishP.innerHTML='';
   event.preventDefault();
   var testCard = event.target.cardGuess.value;//gets user input
   //testCard.toLowerCase();
   testCard = cleanInput(testCard);
   console.log('test card: ' + testCard);
+  var testCard = event.target.cardGuess.value.toLowerCase();
+  var userP = document.getElementById('player-bubble');
+  console.log('test card: ' + testCard);
+  var userGoFish = document.getElementById('player-go-fish');
+  userGoFish.textContent = 'Go Fish';
+  userP.textContent = 'Do you have any ' + testCard + '\'s';
+  if (testCard === 'a' || testCard === 'ace' || testCard === 'aces') {
+    testCard = 'a';
+    // console.log('a = true')
+  }
+  if (testCard === 'k' || testCard === 'king' || testCard === 'kings') {
+    testCard = 'k';
+    // console.log('k = true')
+  }
+  if (testCard === 'q' || testCard === 'queen' || testCard === 'queens') {
+    testCard = 'q';
+    // console.log('q = true')
+  }
+  if (testCard === 'j' || testCard === 'jack' || testCard === 'jacks') {
+    testCard = 'j';
+    // console.log('j = true')
+  };
 
   var realCard = cardExistsInList(testCard, fullDeck); // returns true if in fullDeck
   var hasCard = cardExistsInList(testCard, userHand); // returns true if in asker's hand
@@ -323,4 +360,3 @@ renderHand();
 // event listeners
 //------------------------------
 inputForm.addEventListener('submit', handlerFunction);
-
